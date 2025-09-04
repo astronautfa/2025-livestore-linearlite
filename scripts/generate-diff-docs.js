@@ -38,7 +38,7 @@ const safeExecSync = (command) => {
   }
 }
 
-// Function to get a list of all affected files (excluding .gitignore + pnpm-lock.yaml)
+// Function to get a list of all affected files (excluding .gitignore + bun.lock)
 const getAffectedFiles = () => {
   log.info('Getting list of affected files...')
   
@@ -55,7 +55,7 @@ const getAffectedFiles = () => {
   let files = Array.from(allChangedFiles)
 
   // Exclude files that shouldn't be included in the diff
-  files = files.filter((f) => f !== 'pnpm-lock.yaml' && f !== 'git.changes.md')
+  files = files.filter((f) => f !== 'bun.lock' && f !== 'git.changes.md')
 
   log.success(`Found ${files.length} affected files.`)
   return files
@@ -167,7 +167,7 @@ ${colors.bright}Usage:${colors.reset}
 ${colors.bright}Features:${colors.reset}
   ✅ Documents only affected file paths
   ✅ Respects .gitignore rules
-  ✅ Ignores pnpm-lock.yaml
+  ✅ Ignores bun.lock
   ✅ Provides a complete, unified diff of all code changes
   ✅ Includes a tailored prompt for an LLM
   ✅ Outputs a Markdown file ready for LLM processing

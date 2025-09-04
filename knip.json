@@ -1,0 +1,39 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "index.html",
+    "src/app/main.tsx",
+    "src/app/app.tsx",
+    "vite.config.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx,js,jsx}"],
+  "paths": {
+    "@/*": ["src/*"]
+  },
+  "ignore": [
+    "**/*.d.ts",
+    "**/*.config.*",
+    "**/dist/**",
+    "**/build/**",
+    "**/node_modules/**"
+  ],
+  "ignoreDependencies": [
+    "@types/node",
+    "@types/react",
+    "@types/react-dom",
+    "typescript",
+    "vite",
+    "@vitejs/plugin-react",
+    "tailwindcss",
+    "@tailwindcss/vite",
+    "@tailwindcss/typography",
+    "@tailwindcss/forms",
+    "vite-plugin-svgr",
+    "@svgr/plugin-jsx",
+    "@svgr/plugin-svgo",
+    "ultracite",
+    "@biomejs/biome",
+    "husky",
+    "knip"
+  ]
+}
