@@ -10,7 +10,7 @@ export const UserInput = ({ className }: { className?: string }) => {
       <Input
         aria-label="Test User"
         autoComplete="off"
-        className="h-6 grow rounded border-none bg-neutral-800 bg-transparent px-1.5 text-neutral-300 text-xs placeholder:text-neutral-500 hover:bg-neutral-700 focus:border-none focus:bg-neutral-700 focus:outline-none focus:ring-0 lg:w-28 lg:grow-0"
+        className="h-6 grow rounded border-none bg-neutral-800 px-1.5 text-neutral-300 text-xs placeholder:text-neutral-500 hover:bg-neutral-700 focus:border-none focus:bg-neutral-700 focus:outline-none focus:ring-0 lg:w-28 lg:grow-0"
         onBlur={() => setFrontendState({ ...frontendState, user: frontendState.user || 'John Doe' })}
         onChange={(e) => setFrontendState({ ...frontendState, user: e.target.value })}
         placeholder="Test User"

@@ -41,16 +41,21 @@ const safeExecSync = (command) => {
 // Function to get a list of all affected files (excluding .gitignore + pnpm-lock.yaml)
 const getAffectedFiles = () => {
   log.info('Getting list of affected files...')
-  // --modified (M) and --others (untracked), exclude .gitignore rules
-  const statusOutput = safeExecSync('git ls-files --exclude-standard --others --modified')
-  if (!statusOutput) {
-    return []
-  }
+  
+  // Get both staged and unstaged changes
+  const stagedFiles = safeExecSync('git diff --cached --name-only') || ''
+  const unstagedFiles = safeExecSync('git diff --name-only') || ''
+  
+  // Combine and deduplicate files
+  const allChangedFiles = new Set([
+    ...stagedFiles.split('\n').filter(Boolean),
+    ...unstagedFiles.split('\n').filter(Boolean)
+  ])
+  
+  let files = Array.from(allChangedFiles)
 
-  let files = statusOutput.split('\n').filter(Boolean)
-
-  // Exclude pnpm-lock.yaml explicitly
-  files = files.filter((f) => f !== 'pnpm-lock.yaml')
+  // Exclude files that shouldn't be included in the diff
+  files = files.filter((f) => f !== 'pnpm-lock.yaml' && f !== 'git.changes.md')
 
   log.success(`Found ${files.length} affected files.`)
   return files
@@ -72,16 +77,19 @@ async function main() {
   log.info('Fetching content for each changed file...')
 
   for (const file of affectedFiles) {
-    const filePath = join(rootDir, file)
-    let diff = null
-
     try {
-      // Get the diff for the file
-      diff = safeExecSync(`git diff HEAD -- "${filePath}"`)
-      if (diff) {
+      // Get staged changes for this file
+      const stagedDiff = safeExecSync(`git diff --cached -- "${file}"`) || ''
+      // Get unstaged changes for this file
+      const unstagedDiff = safeExecSync(`git diff -- "${file}"`) || ''
+      
+      // Combine both diffs if they exist
+      const combinedDiff = [stagedDiff, unstagedDiff].filter(d => d.length > 0).join('\n')
+      
+      if (combinedDiff.length > 0) {
         fileContents += `### Diff: ${file}\n\n`
         fileContents += '```diff\n'
-        fileContents += `${diff}\n`
+        fileContents += `${combinedDiff}\n`
         fileContents += '```\n\n'
       }
     } catch (diffError) {

@@ -62,12 +62,13 @@
   },
   "scripts": {
     "build": "bunx vite build",
-    "dev": "bunx vite --force",
+    "dev": "bun run clean-vit-cache && bunx vite --force",
     "lint": "bunx biome check .",
     "lint:fix": "bunx biome check --write .",
     "format": "bunx biome format --write .",
     "preview": "bunx vite preview",
     "vite": "bunx vite",
+    "clean-vit-cache": "bun scripts/clean-vit-cache.js",
     "generate-diff-docs": "bun scripts/generate-diff-docs.js"
   },
   "packageManager": "bun@1.2.21"
