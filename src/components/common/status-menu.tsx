@@ -40,18 +40,21 @@ export const StatusMenu = ({
         aria-label="Select status"
         className="group flex h-8 min-w-8 items-center justify-center gap-1.5 rounded-lg px-2 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
       >
-        <Icon className={`size-3.5 ${statusOptions[status]!.style}`} name={statusOptions[status]!.icon as IconName} />
-        {showLabel && <span>{statusOptions[status]!.name}</span>}
+        <Icon
+          className={`size-3.5 ${statusOptions[status]?.style || ''}`}
+          name={statusOptions[status]?.icon as IconName}
+        />
+        {showLabel && <span>{statusOptions[status]?.name}</span>}
       </Button>
       <Popover
         className="ml-1 w-48 rounded-lg border border-neutral-200 bg-white p-2 text-sm leading-none shadow-md dark:border-neutral-700 dark:bg-neutral-800"
         offset={0}
       >
         <Menu className="focus:outline-none" {...keyboardProps}>
-          {statusOptions.map(({ name, icon, style, shortcut }, statusOption) => (
+          {statusOptions.map(({ name, id, icon, style, shortcut }, statusOption) => (
             <MenuItem
               className="flex cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
-              key={statusOption}
+              key={id}
               onAction={() => onStatusChange(statusOption as Status)}
             >
               <Icon className={`size-3.5 ${style}`} name={icon as IconName} />

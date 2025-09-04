@@ -23,6 +23,14 @@ export const Card = ({ issue, className }: { issue: Issue; className?: string })
     <div
       className={`h-full cursor-pointer rounded-md border border-transparent bg-white p-2 text-sm shadow-sm dark:border-neutral-700/50 dark:bg-neutral-900 dark:shadow-none ${className ?? ''}`}
       onClick={() => navigate(`/issue/${issue.id}`)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          navigate(`/issue/${issue.id}`)
+        }
+      }}
+      role="button"
+      tabIndex={0}
     >
       <Button className="absolute top-0 left-0 size-0" slot="drag" />
       <div className="mb-0.5 flex items-center justify-between pt-1 pr-1 pl-2">

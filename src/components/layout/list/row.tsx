@@ -23,12 +23,13 @@ export const Row = memo(({ issue, style }: { issue: Issue; style: CSSProperties 
     store.commit(events.updateIssuePriority({ id: issue.id, priority, modified: new Date() }))
 
   return (
-    <div
-      className="flex w-full cursor-pointer items-center justify-between gap-4 border-neutral-200 border-b pr-4 pl-2 text-sm last:border-b-0 hover:bg-neutral-50 lg:pl-4 dark:border-neutral-700 dark:hover:bg-neutral-800/50"
+    <button
+      className="flex w-full cursor-pointer items-center justify-between gap-4 border-neutral-200 border-b border-none bg-transparent p-0 pr-4 pl-2 text-left text-sm last:border-b-0 hover:bg-neutral-50 lg:pl-4 dark:border-neutral-700 dark:hover:bg-neutral-800/50"
       id={issue.id.toString()}
       key={issue.id}
       onClick={() => navigate(`/issue/${issue.id}`)}
       style={style}
+      type="button"
     >
       <div className="flex items-center gap-px">
         <PriorityMenu onPriorityChange={handleChangePriority} priority={issue.priority} />
@@ -44,6 +45,6 @@ export const Row = memo(({ issue, style }: { issue: Issue; style: CSSProperties 
         </div>
         <Avatar name={issue.creator} />
       </div>
-    </div>
+    </button>
   )
 })

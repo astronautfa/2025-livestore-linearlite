@@ -6,7 +6,12 @@ import { useFilterState } from '@/lib/livestore/queries'
 
 export const SearchButton = () => {
   const [, setFilterState] = useFilterState()
-  const { setShowMenu } = React.useContext(MenuContext)!
+  const menuContext = React.useContext(MenuContext)
+  const { setShowMenu } = menuContext || {
+    setShowMenu: () => {
+      // Default no-op function when menu context is not available
+    },
+  }
 
   return (
     <Link

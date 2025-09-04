@@ -26,8 +26,8 @@ export const Board = () => {
       <Filters filteredCount={filteredIssueIds.length} hideSorting hideStatusFilter />
       <div className="grow overflow-x-auto">
         <div className="flex h-full gap-4 p-4">
-          {statusOptions.map((statusDetails, statusOption) => (
-            <Column key={statusOption} status={statusOption as Status} statusDetails={statusDetails} />
+          {statusOptions.map((statusDetails, index) => (
+            <Column key={statusDetails.id} status={index as Status} statusDetails={statusDetails} />
           ))}
           <div className="-ml-4 w-4 shrink-0" />
         </div>

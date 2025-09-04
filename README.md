@@ -1,4 +1,4 @@
-# 2025-livestore-linearlite
+# 2025-livestore-zensync
 
 A modern React application built with Vite, TypeScript, and Tailwind CSS, using Bun as the runtime and package manager.
 

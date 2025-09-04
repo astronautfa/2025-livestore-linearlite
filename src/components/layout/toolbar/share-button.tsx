@@ -4,6 +4,8 @@ import { Button, ModalOverlay, Modal as ReactAriaModal } from 'react-aria-compon
 
 // This uses a public QR code API: https://goqr.me/api/doc/create-qr-code/
 
+const COPIED_TIMEOUT_MS = 2000
+
 export const ShareButton = ({ className }: { className?: string }) => {
   const [copied, setCopied] = React.useState(false)
   const [showQR, setShowQR] = React.useState(false)
@@ -14,7 +16,7 @@ export const ShareButton = ({ className }: { className?: string }) => {
     setCopied(true)
     setTimeout(() => {
       setCopied(false)
-    }, 2000)
+    }, COPIED_TIMEOUT_MS)
   }
 
   return (
@@ -59,6 +61,7 @@ export const ShareButton = ({ className }: { className?: string }) => {
       >
         <ReactAriaModal className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-4 shadow-lg">
           <img
+            alt="QR code for sharing workspace URL"
             crossOrigin="anonymous"
             height="200"
             src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURI(window.location.href)}`}

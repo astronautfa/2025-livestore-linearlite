@@ -5,7 +5,13 @@ import { Sidebar } from '@/components/layout/sidebar'
 import { useFrontendState } from '@/lib/livestore/queries'
 
 export const MobileMenu = () => {
-  const { showMenu, setShowMenu } = React.useContext(MenuContext)!
+  const menuContext = React.useContext(MenuContext)
+  const { showMenu, setShowMenu } = menuContext || {
+    showMenu: false,
+    setShowMenu: () => {
+      // Default no-op function when menu context is not available
+    },
+  }
   const [frontendState] = useFrontendState()
 
   return (

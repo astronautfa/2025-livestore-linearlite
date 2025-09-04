@@ -6,8 +6,18 @@ import { Icon } from '@/components/icons'
 import type { Status } from '@/types/status'
 
 export const NewIssueButton = ({ status }: { status?: Status }) => {
-  const { setNewIssueModalStatus } = React.useContext(NewIssueModalContext)!
-  const { setShowMenu } = React.useContext(MenuContext)!
+  const newIssueModalContext = React.useContext(NewIssueModalContext)
+  const { setNewIssueModalStatus } = newIssueModalContext || {
+    setNewIssueModalStatus: () => {
+      // Default no-op function when modal context is not available
+    },
+  }
+  const menuContext = React.useContext(MenuContext)
+  const { setShowMenu } = menuContext || {
+    setShowMenu: () => {
+      // Default no-op function when menu context is not available
+    },
+  }
 
   return (
     <Button

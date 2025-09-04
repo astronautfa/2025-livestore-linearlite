@@ -3,10 +3,10 @@ import { Modal } from '@/components/common/modal'
 
 export const AboutModal = ({ show, setShow }: { show: boolean; setShow: (show: boolean) => void }) => {
   return (
-    <Modal setShow={setShow} show={show} title="About LinearLite">
+    <Modal setShow={setShow} show={show} title="About Zen Sync">
       <div className="flex flex-col gap-2 p-4 text-neutral-500 text-sm">
         <p>
-          LinearLite is an example of a collaboration application using a local-first approach, obviously inspired by{' '}
+          Zen Sync is an example of a collaboration application using a local-first approach, obviously inspired by{' '}
           <Link className="text-orange-600 underline" target="_blank" to="https://linear.app">
             Linear
           </Link>

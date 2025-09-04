@@ -1,5 +1,5 @@
 import { queryDb } from '@livestore/livestore'
-import * as LiveStoreReact from '@livestore/react'
+import { useStore } from '@livestore/react'
 import { generateKeyBetween } from 'fractional-indexing'
 import React from 'react'
 import {
@@ -24,7 +24,7 @@ import type { Status } from '@/types/status'
 import { Card } from './card'
 
 export const Column = ({ status, statusDetails }: { status: Status; statusDetails: StatusDetails }) => {
-  const { store } = LiveStoreReact.useStore()
+  const { store } = useStore()
   // TODO restore initial scroll position once React Aria supports this scenario
   const [_scrollState, setScrollState] = useDebouncedScrollState(`column-${status}-${store.sessionId}`)
   const [filterState] = useFilterState()
@@ -39,7 +39,7 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
   )
   const filteredIssues = store.useQuery(filteredIssues$)
 
-  const getNewCanbanOrder = (targetId: string, dropPosition: DropPosition) => {
+  const getNewKanbanOrder = (targetId: string, dropPosition: DropPosition) => {
     const before = dropPosition !== 'after'
     const targetKanbanOrder = store.query(
       tables.issue
@@ -68,14 +68,14 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
     getItems: (keys) => [...keys].map((key) => ({ 'text/plain': key.toString() })),
     onReorder: (e: DroppableCollectionReorderEvent) => {
       const items = [...e.keys]
-      const kanbanorder = getNewCanbanOrder(e.target.key as string, e.target.dropPosition)
+      const kanbanorder = getNewKanbanOrder(e.target.key as string, e.target.dropPosition)
       store.commit(events.updateIssueKanbanOrder({ id: Number(items[0]), status, kanbanorder, modified: new Date() }))
     },
     onInsert: async (e) => {
       const items = await Promise.all(
         e.items.filter(isTextDropItem).map(async (item) => JSON.parse(await item.getText('text/plain')).toString()),
       )
-      const kanbanorder = getNewCanbanOrder(e.target.key as string, e.target.dropPosition)
+      const kanbanorder = getNewKanbanOrder(e.target.key as string, e.target.dropPosition)
       store.commit(events.updateIssueKanbanOrder({ id: Number(items[0]), status, kanbanorder, modified: new Date() }))
     },
     onRootDrop: async (e) => {

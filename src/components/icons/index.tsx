@@ -20,7 +20,7 @@ const icons = {
   done: DoneIcon,
   filter: FilterIcon,
   'in-progress': InProgressIcon,
-  linearlite: LinearLiteIcon,
+  zensync: LinearLiteIcon,
   livestore: LivestoreIcon,
   'new-issue': NewIssueIcon,
   'priority-none': PriorityNoneIcon,

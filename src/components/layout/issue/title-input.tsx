@@ -17,12 +17,12 @@ export const TitleInput = ({
 }) => {
   const { store } = useStore()
 
-  const handleTitleChange = (title: string) => {
+  const handleTitleChange = (newTitle: string) => {
     if (issue) {
-      store.commit(events.updateIssueTitle({ id: issue.id, title, modified: new Date() }))
+      store.commit(events.updateIssueTitle({ id: issue.id, title: newTitle, modified: new Date() }))
     }
     if (setTitle) {
-      setTitle(title)
+      setTitle(newTitle)
     }
   }
 

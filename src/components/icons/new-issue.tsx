@@ -1,7 +1,14 @@
-
 export const NewIssueIcon = ({ className }: { className?: string }) => {
   return (
-    <svg className={`fill-current ${className}`} fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={`fill-current ${className}`}
+      fill="none"
+      viewBox="0 0 16 16"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby="new-issue-icon-title"
+    >
+      <title id="new-issue-icon-title">Create new issue</title>
       <path
         clipRule="evenodd"
         d="M1 5.25C1 2.90279 2.90279 1 5.25 1H7.25C7.66421 1 8 1.33579 8 1.75C8 2.16421 7.66421 2.5 7.25 2.5H5.25C3.73122 2.5 2.5 3.73122 2.5 5.25V10.75C2.5 12.2688 3.73122 13.5 5.25 13.5H10.75C12.2688 13.5 13.5 12.2688 13.5 10.75V8.75287C13.5 8.33865 13.8358 8.00287 14.25 8.00287C14.6642 8.00287 15 8.33865 15 8.75287V10.75C15 13.0972 13.0972 15 10.75 15H5.25C2.90279 15 1 13.0972 1 10.75V5.25Z"

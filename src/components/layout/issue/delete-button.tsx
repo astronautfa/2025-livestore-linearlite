@@ -4,6 +4,8 @@ import React from 'react'
 import { Button } from 'react-aria-components'
 import { events } from '@/lib/livestore/schema'
 
+const DELETE_CONFIRMATION_TIMEOUT_MS = 2000
+
 export const DeleteButton = ({
   issueId,
   close,
@@ -30,7 +32,7 @@ export const DeleteButton = ({
     setConfirm(true)
     setTimeout(() => {
       setConfirm(false)
-    }, 2000)
+    }, DELETE_CONFIRMATION_TIMEOUT_MS)
   }
 
   return (

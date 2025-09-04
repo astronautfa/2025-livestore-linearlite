@@ -3,6 +3,8 @@ import React from 'react'
 import { Button } from 'react-aria-components'
 import { useNavigate } from 'react-router-dom'
 
+const CONFIRM_TIMEOUT_MS = 2000
+
 export const ResetButton = ({ className }: { className?: string }) => {
   const [confirm, setConfirm] = React.useState(false)
   const navigate = useNavigate()
@@ -15,7 +17,7 @@ export const ResetButton = ({ className }: { className?: string }) => {
     setConfirm(true)
     setTimeout(() => {
       setConfirm(false)
-    }, 2000)
+    }, CONFIRM_TIMEOUT_MS)
   }
 
   return (

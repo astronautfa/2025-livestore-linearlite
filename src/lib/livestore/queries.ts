@@ -1,6 +1,6 @@
-import React from 'react'
 import { queryDb } from '@livestore/livestore'
 import { useClientDocument } from '@livestore/react'
+import React from 'react'
 import { tables } from '@/lib/livestore/schema'
 
 export const useFilterState = () => useClientDocument(tables.filterState)
@@ -12,14 +12,14 @@ export const useDebouncedScrollState = (id: string, { debounce = 100 }: { deboun
   const debounceTimeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
   const setState = React.useCallback(
-    (state: typeof initialState) => {
+    (newState: typeof initialState) => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current)
       }
 
       debounceTimeoutRef.current = setTimeout(() => {
-        setPersistedState(state)
-        setReactState(state)
+        setPersistedState(newState)
+        setReactState(newState)
       }, debounce)
     },
     [setPersistedState, debounce],

@@ -15,7 +15,11 @@ import type { Status } from '@/types/status'
 
 export const NewIssueModal = () => {
   const [frontendState] = useFrontendState()
-  const { newIssueModalStatus, setNewIssueModalStatus } = React.useContext(NewIssueModalContext)!
+  const context = React.useContext(NewIssueModalContext)
+  if (!context) {
+    throw new Error('NewIssueModal must be used within a NewIssueModalProvider')
+  }
+  const { newIssueModalStatus, setNewIssueModalStatus } = context
   const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [priority, setPriority] = React.useState<Priority>(0)

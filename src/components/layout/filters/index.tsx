@@ -33,7 +33,11 @@ export const Filters = ({
       ) : (
         <Header
           filteredCount={filteredCount}
-          heading={filterState?.status?.length === 1 ? statusOptions[filterState.status[0] as Status]!.name : 'Issues'}
+          heading={
+            filterState?.status?.length === 1
+              ? statusOptions[filterState.status[0] as Status]?.name || 'Issues'
+              : 'Issues'
+          }
           totalCount={totalCount}
         />
       )}

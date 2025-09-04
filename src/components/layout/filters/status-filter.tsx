@@ -20,17 +20,17 @@ export const StatusFilter = () => {
       </div>
       <FilterMenu type="status">
         <Button className="flex h-full items-center gap-1.5 pr-2 pl-5 hover:bg-neutral-50 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800">
-          {filterState.status.map((status, index) => (
-            <div className="-ml-3 h-4 rounded-full bg-white p-px dark:bg-neutral-900" key={index}>
+          {filterState.status.map((status) => (
+            <div className="-ml-3 h-4 rounded-full bg-white p-px dark:bg-neutral-900" key={status}>
               <Icon
-                className={`h-full ${statusOptions[status as Status]!.style}`}
-                name={statusOptions[status as Status]!.icon as IconName}
+                className={`h-full ${statusOptions[status as Status]?.style || ''}`}
+                name={statusOptions[status as Status]?.icon as IconName}
               />
             </div>
           ))}
           {filterState.status.length === 1 ? (
             <span className="font-medium text-neutral-600 dark:text-neutral-200">
-              {statusOptions[filterState.status[0] as Status]!.name}
+              {statusOptions[filterState.status[0] as Status]?.name || 'Unknown'}
             </span>
           ) : (
             <span>{filterState.status.length} statuses</span>

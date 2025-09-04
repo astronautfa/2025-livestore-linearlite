@@ -1,7 +1,14 @@
-
 export const LivestoreIcon = ({ className }: { className?: string }) => {
   return (
-    <svg className={`fill-current ${className}`} fill="none" viewBox="0 0 26 29" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={`fill-current ${className}`}
+      fill="none"
+      viewBox="0 0 26 29"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby="livestore-icon-title"
+    >
+      <title id="livestore-icon-title">Livestore application logo</title>
       <path
         clipRule="evenodd"
         d="M10.7354 19.5171C4.66418 19.1745 0 17.1375 0 14.6758V17.8662C0 20.3011 4.56311 22.3205 10.5375 22.6957L10.7354 19.5171ZM16.5738 22.5012C21.5303 21.8473 25.098 20.0192 25.098 17.8662L25.098 14.6758C25.098 16.5336 22.4415 18.1495 18.5285 18.9778C18.0789 19.8138 17.4274 20.9883 16.5738 22.5012Z"

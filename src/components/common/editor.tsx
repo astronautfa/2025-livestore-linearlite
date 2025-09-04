@@ -1,3 +1,4 @@
+import Placeholder from '@tiptap/extension-placeholder'
 import { EditorContent, type Extensions, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect } from 'react'
@@ -15,13 +16,21 @@ const Editor = ({
   onBlur,
   onChange,
   className = '',
+  placeholder = '',
 }: {
   value: string
   onBlur?: (value: string) => void
   onChange?: (value: string) => void
   className?: string
+  placeholder?: string
 }) => {
-  const extensions: Extensions = [StarterKit, Markdown]
+  const extensions: Extensions = [
+    StarterKit,
+    Markdown,
+    Placeholder.configure({
+      placeholder,
+    }),
+  ]
 
   const editor = useEditor({
     extensions,

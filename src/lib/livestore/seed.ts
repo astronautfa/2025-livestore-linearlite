@@ -12,10 +12,11 @@ export const seed = (store: Store, count: number) => {
     const existingCount = store.query(issueCount$)
     const highestId = store.query(highestIssueId$)
     const highestKanbanOrder = store.query(highestKanbanOrder$)
-    if (existingCount >= count) return
-    count -= existingCount
-    console.log('SEEDING WITH ', count, ' ADDITIONAL ROWS')
-    store.commit(...Array.from(createIssues(count, highestId, highestKanbanOrder)))
+    if (existingCount >= count) {
+      return
+    }
+    const additionalCount = count - existingCount
+    store.commit(...Array.from(createIssues(additionalCount, highestId, highestKanbanOrder)))
   } finally {
     const url = new URL(window.location.href)
     url.searchParams.delete('seed')
@@ -28,10 +29,21 @@ function* createIssues(
   highestId?: number,
   highestKanbanOrder?: string,
 ): Generator<typeof events.createIssueWithDescription.Event> {
-  if (!highestId) highestId = 0
+  const startingId = highestId ?? 0
+  let currentId = startingId
   let kanbanorder = highestKanbanOrder ?? 'a1'
 
-  const getRandomItem = <T>(items: T[]) => items[Math.floor(Math.random() * items.length)]!
+  const getRandomItem = <T>(items: T[]): T => {
+    if (items.length === 0) {
+      throw new Error('Cannot get random item from empty array')
+    }
+    const randomIndex = Math.floor(Math.random() * items.length)
+    const item = items[randomIndex]
+    if (item === undefined) {
+      throw new Error('Unexpected undefined item in array')
+    }
+    return item
+  }
   const generateText = () => {
     const action = getRandomItem(actionPhrases)
     const feature = getRandomItem(featurePhrases)
@@ -41,16 +53,23 @@ function* createIssues(
   }
 
   const now = Date.now()
-  const ONE_DAY = 24 * 60 * 60 * 1000
+  const HOURS_PER_DAY = 24
+  const MINUTES_PER_HOUR = 60
+  const SECONDS_PER_MINUTE = 60
+  const MILLISECONDS_PER_SECOND = 1000
+  const MILLISECONDS_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
+  const DAYS_BETWEEN_ISSUES = 5
+
   for (let i = 0; i < numTasks; i++) {
     kanbanorder = generateKeyBetween(kanbanorder, undefined)
     const [title, description] = generateText()
+    currentId += 1
     const issue = events.createIssueWithDescription({
-      id: (highestId += 1),
+      id: currentId,
       creator: 'John Doe',
       title,
-      created: new Date(now - (numTasks - i) * 5 * ONE_DAY),
-      modified: new Date(now - (numTasks - i) * 2 * ONE_DAY),
+      created: new Date(now - (numTasks - i) * DAYS_BETWEEN_ISSUES * MILLISECONDS_PER_DAY),
+      modified: new Date(now - (numTasks - i) * 2 * MILLISECONDS_PER_DAY),
       status: getRandomItem(statuses),
       priority: getRandomItem(priorities),
       kanbanorder,

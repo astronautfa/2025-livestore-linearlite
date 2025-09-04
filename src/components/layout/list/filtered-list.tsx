@@ -9,7 +9,7 @@ export const FilteredList = ({ filteredIssueIds }: { filteredIssueIds: readonly 
         {({ height, width }: { width: number; height: number }) => (
           <List
             overscanCount={10}
-            rowComponent={({ index, style, ...rowProps }: any) => (
+            rowComponent={({ index, style, ...rowProps }) => (
               <VirtualRow data={rowProps} index={index} style={style} />
             )}
             rowCount={filteredIssueIds.length}

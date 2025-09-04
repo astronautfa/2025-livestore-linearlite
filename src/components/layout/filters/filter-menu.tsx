@@ -1,5 +1,4 @@
 import { CheckIcon } from '@heroicons/react/16/solid'
-import React from 'react'
 import { Header, Menu, MenuItem, MenuSection, MenuTrigger, Popover, Separator } from 'react-aria-components'
 import { Icon, type IconName } from '@/components/icons'
 import { priorityOptions } from '@/data/priority-options'
@@ -11,8 +10,11 @@ import type { Status } from '@/types/status'
 export const FilterMenu = ({ type, children }: { type?: 'status' | 'priority'; children?: React.ReactNode }) => {
   const [filterState, setFilterState] = useFilterState()
 
-  const toggleFilter = ({ type, value }: { type: 'status'; value: Status } | { type: 'priority'; value: Priority }) => {
-    let filters: (Status | Priority)[] | undefined = [...(filterState[type] ?? [])]
+  const toggleFilter = ({
+    filterType,
+    value,
+  }: { filterType: 'status'; value: Status } | { filterType: 'priority'; value: Priority }) => {
+    let filters: (Status | Priority)[] | undefined = [...(filterState[filterType] ?? [])]
     if (filters.includes(value)) {
       filters.splice(filters.indexOf(value), 1)
     } else {
@@ -21,7 +23,7 @@ export const FilterMenu = ({ type, children }: { type?: 'status' | 'priority'; c
     if (!filters.length) {
       filters = undefined
     }
-    setFilterState({ [type]: filters })
+    setFilterState({ [filterType]: filters })
   }
 
   return (
@@ -32,13 +34,13 @@ export const FilterMenu = ({ type, children }: { type?: 'status' | 'priority'; c
           {type !== 'priority' && (
             <MenuSection className="p-2" key="status">
               <Header className="p-2 font-medium text-2xs text-neutral-400 uppercase tracking-wide">Status</Header>
-              {statusOptions.map(({ name, icon, style }, statusOption) => {
-                const active = filterState.status?.includes(statusOption as Status)
+              {statusOptions.map(({ name, icon, style }, index) => {
+                const active = filterState.status?.includes(index as Status)
                 return (
                   <MenuItem
                     className="group/item flex cursor-pointer items-center gap-2 rounded-md p-2 pl-9 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
-                    key={statusOption}
-                    onAction={() => toggleFilter({ type: 'status', value: statusOption as Status })}
+                    key={name}
+                    onAction={() => toggleFilter({ filterType: 'status', value: index as Status })}
                   >
                     <div
                       className={`absolute left-4 size-4 rounded ${active ? 'bg-indigo-500' : 'hidden border border-neutral-300 group-hover/item:block group-focus/item:block dark:border-neutral-600'}`}
@@ -56,13 +58,13 @@ export const FilterMenu = ({ type, children }: { type?: 'status' | 'priority'; c
           {type !== 'status' && (
             <MenuSection className="p-2" key="priority">
               <Header className="p-2 font-medium text-2xs text-neutral-400 uppercase tracking-wide">Priority</Header>
-              {priorityOptions.map(({ name, icon, style }, priorityOption) => {
-                const active = filterState.priority?.includes(priorityOption as Priority)
+              {priorityOptions.map(({ name, icon, style }, index) => {
+                const active = filterState.priority?.includes(index as Priority)
                 return (
                   <MenuItem
                     className="group/item flex cursor-pointer items-center gap-2 rounded-md p-2 pl-9 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
-                    key={priorityOption}
-                    onAction={() => toggleFilter({ type: 'priority', value: priorityOption as Priority })}
+                    key={name}
+                    onAction={() => toggleFilter({ filterType: 'priority', value: index as Priority })}
                   >
                     <div
                       className={`absolute left-4 size-4 rounded ${active ? 'bg-indigo-500' : 'hidden border border-neutral-300 group-hover/item:block group-focus/item:block dark:border-neutral-600'}`}
