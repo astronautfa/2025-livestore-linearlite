@@ -1,6 +1,5 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
-import React from 'react'
 import { Column } from '@/components/layout/board/column'
 import { Filters } from '@/components/layout/filters'
 import { statusOptions } from '@/data/status-options'

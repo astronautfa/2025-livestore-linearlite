@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const Shortcut = ({ keys, className }: { keys: string[]; className?: string }) => {
   return (

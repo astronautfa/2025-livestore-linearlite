@@ -1,6 +1,5 @@
 import { TrashIcon } from '@heroicons/react/16/solid'
 import { useStore } from '@livestore/react'
-import React from 'react'
 import { Button } from 'react-aria-components'
 import { events } from '@/lib/livestore/schema'
 

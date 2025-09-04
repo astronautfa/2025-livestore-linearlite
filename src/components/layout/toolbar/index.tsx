@@ -1,5 +1,4 @@
 import { FPSMeter } from '@overengineering/fps-meter'
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons'
 import { DownloadButton } from '@/components/layout/toolbar/download-button'

@@ -1,7 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
-import React from 'react'
 import { Button } from 'react-aria-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Avatar } from '@/components/common/avatar'

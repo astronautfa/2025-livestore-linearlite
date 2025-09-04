@@ -1,6 +1,5 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
-import React from 'react'
 import { Filters } from '@/components/layout/filters'
 import { FilteredList } from '@/components/layout/list/filtered-list'
 import { filterState$ } from '@/lib/livestore/queries'

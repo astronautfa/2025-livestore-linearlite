@@ -1,6 +1,5 @@
 import { useStore } from '@livestore/react'
 import { generateKeyBetween } from 'fractional-indexing'
-import React from 'react'
 import { Button } from 'react-aria-components'
 import { NewIssueModalContext } from '@/app/contexts'
 import { Modal } from '@/components/common/modal'
@@ -29,7 +28,9 @@ export const NewIssueModal = () => {
   }
 
   const createIssue = () => {
-    if (!title) return
+    if (!title) {
+      return
+    }
     const date = new Date()
     // TODO make this "merge safe"
     const highestIssueId = store.query(highestIssueId$)

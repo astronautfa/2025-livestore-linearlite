@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const InProgressIcon = ({ className }: { className?: string }) => {
   return (

@@ -1,5 +1,4 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { MenuContext } from '@/app/contexts'
 import { useFilterState } from '@/lib/livestore/queries'

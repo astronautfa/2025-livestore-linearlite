@@ -1,6 +1,5 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
-import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Avatar } from '@/components/common/avatar'
 import { tables } from '@/lib/livestore/schema'

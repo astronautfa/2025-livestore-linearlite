@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const SidebarIcon = ({ className }: { className?: string }) => {
   return (

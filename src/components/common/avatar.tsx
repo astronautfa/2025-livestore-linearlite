@@ -1,4 +1,3 @@
-import React from 'react'
 import { getAcronym } from '@/utils/get-acronym'
 
 export const Avatar = ({ name }: { name?: string }) => {

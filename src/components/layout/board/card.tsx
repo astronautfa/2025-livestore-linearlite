@@ -1,5 +1,4 @@
 import { useStore } from '@livestore/react'
-import React from 'react'
 import { Button } from 'react-aria-components'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@/components/common/avatar'

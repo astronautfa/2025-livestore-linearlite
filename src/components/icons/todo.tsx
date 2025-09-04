@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const TodoIcon = ({ className }: { className?: string }) => {
   return (

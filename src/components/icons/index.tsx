@@ -1,4 +1,3 @@
-import React from 'react'
 import { BacklogIcon } from '@/components/icons/backlog'
 import { CanceledIcon } from '@/components/icons/canceled'
 import { DoneIcon } from '@/components/icons/done'

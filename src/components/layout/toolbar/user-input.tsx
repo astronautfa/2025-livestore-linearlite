@@ -1,4 +1,3 @@
-import React from 'react'
 import { Input } from 'react-aria-components'
 import { useFrontendState } from '@/lib/livestore/queries'
 

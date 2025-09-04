@@ -1,7 +1,6 @@
 import { queryDb } from '@livestore/livestore'
 import * as LiveStoreReact from '@livestore/react'
 import { generateKeyBetween } from 'fractional-indexing'
-import React from 'react'
 import {
   DropIndicator,
   type DropPosition,

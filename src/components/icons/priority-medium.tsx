@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const PriorityMediumIcon = ({ className }: { className?: string }) => {
   return (

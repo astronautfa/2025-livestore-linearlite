@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const PriorityNoneIcon = ({ className }: { className?: string }) => {
   return (

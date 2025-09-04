@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const PriorityUrgentIcon = ({ className }: { className?: string }) => {
   return (

@@ -1,5 +1,4 @@
 import { XMarkIcon } from '@heroicons/react/20/solid'
-import React from 'react'
 import { Button } from 'react-aria-components'
 
 export const BackButton = ({ close }: { close: () => void }) => {

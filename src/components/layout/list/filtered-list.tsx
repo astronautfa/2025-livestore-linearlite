@@ -1,4 +1,3 @@
-import React from 'react'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { List } from 'react-window'
 import { VirtualRow } from '@/components/layout/list/virtual-row'

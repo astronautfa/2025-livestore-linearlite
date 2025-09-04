@@ -1,5 +1,4 @@
 import { Bars4Icon, ViewColumnsIcon } from '@heroicons/react/24/outline'
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { MenuContext } from '@/app/contexts'
 import { AboutMenu } from '@/components/layout/sidebar/about-menu'

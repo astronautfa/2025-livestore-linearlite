@@ -1,5 +1,4 @@
 import type { BootStatus, QueryBuilder } from '@livestore/livestore'
-import React from 'react'
 import { Icon } from '@/components/icons'
 import type { FilterState, tables } from './schema'
 
