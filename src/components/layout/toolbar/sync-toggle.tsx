@@ -1,3 +1,4 @@
+import React from 'react'
 import { Switch } from 'react-aria-components'
 
 export const SyncToggle = ({ className }: { className?: string }) => {

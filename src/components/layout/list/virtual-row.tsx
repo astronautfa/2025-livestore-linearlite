@@ -1,6 +1,6 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
-import React, { type CSSProperties, memo } from 'react'
+import { type CSSProperties, memo } from 'react'
 import { Row } from '@/components/layout/list/row'
 import { tables } from '@/lib/livestore/schema'
 
@@ -9,13 +9,11 @@ export const VirtualRow = memo(
     const { store } = useStore()
     const issueId = data[index]
 
-    if (!issueId) {
-      return null
-    }
+    // Always call the hook with a stable query structure
+    const issue = store.useQuery(queryDb(tables.issue.where({ id: issueId || 0 }).first(), { deps: [issueId] }))
 
-    const issue = store.useQuery(queryDb(tables.issue.where({ id: issueId }).first(), { deps: [issueId] }))
-
-    if (!issue) {
+    // Early return if no issueId or no issue data
+    if (!(issueId && issue)) {
       return null
     }
 

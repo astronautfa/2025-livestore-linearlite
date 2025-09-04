@@ -1,5 +1,6 @@
 import { useStore } from '@livestore/react'
 import { generateKeyBetween } from 'fractional-indexing'
+import React from 'react'
 import { Button } from 'react-aria-components'
 import { NewIssueModalContext } from '@/app/contexts'
 import { Modal } from '@/components/common/modal'

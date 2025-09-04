@@ -1,5 +1,6 @@
 import { ArrowUpIcon } from '@heroicons/react/20/solid'
 import { useStore } from '@livestore/react'
+import React from 'react'
 import { useKeyboard } from 'react-aria'
 import { Button } from 'react-aria-components'
 import Editor from '@/components/common/editor'
@@ -21,7 +22,9 @@ export const CommentInput = ({ issueId, className }: { issueId: number; classNam
   })
 
   const submitComment = () => {
-    if (!commentDraft) return
+    if (!commentDraft) {
+      return
+    }
     store.commit(
       events.createComment({
         id: crypto.randomUUID(),

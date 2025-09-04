@@ -26,8 +26,11 @@ export const Issue = () => {
   const issue = store.useQuery(queryDb(tables.issue.where({ id }).first(), { deps: [id] }))
 
   const close = () => {
-    if (window.history.length > 2) navigate(-1)
-    else navigate('/')
+    if (window.history.length > 2) {
+      navigate(-1)
+    } else {
+      navigate('/')
+    }
   }
 
   const handleChangeStatus = (status: Status) => {

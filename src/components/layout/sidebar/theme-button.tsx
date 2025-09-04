@@ -1,5 +1,6 @@
 import { CheckIcon, MoonIcon, SunIcon } from '@heroicons/react/16/solid'
 import { ComputerDesktopIcon } from '@heroicons/react/20/solid'
+import React from 'react'
 import { useKeyboard } from 'react-aria'
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components'
 import { Shortcut } from '@/components/common/shortcut'
@@ -11,11 +12,14 @@ export const ThemeButton = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [frontendState, setFrontendState] = useFrontendState()
 
-  const selectTheme = (theme: Theme) => {
-    setTheme(theme)
-    setFrontendState({ theme })
-    if (theme === 'system') localStorage.removeItem('theme')
-    else localStorage.theme = theme
+  const selectTheme = (selectedTheme: Theme) => {
+    setTheme(selectedTheme)
+    setFrontendState({ theme: selectedTheme })
+    if (selectedTheme === 'system') {
+      localStorage.removeItem('theme')
+    } else {
+      localStorage.theme = selectedTheme
+    }
     document.documentElement.classList.toggle(
       'dark',
       localStorage.theme === 'dark' ||
@@ -29,13 +33,13 @@ export const ThemeButton = () => {
         setIsOpen(false)
         return
       }
-      themeOptions.forEach(({ id, shortcut }) => {
+      for (const { id, shortcut } of themeOptions) {
         if (e.key === shortcut) {
           selectTheme(id)
           setIsOpen(false)
-          return
+          break
         }
-      })
+      }
     },
   })
 

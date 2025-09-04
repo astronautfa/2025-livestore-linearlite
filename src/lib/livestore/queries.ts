@@ -1,3 +1,4 @@
+import React from 'react'
 import { queryDb } from '@livestore/livestore'
 import { useClientDocument } from '@livestore/react'
 import { tables } from '@/lib/livestore/schema'

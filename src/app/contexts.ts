@@ -1,11 +1,11 @@
 import React from 'react'
 import type { Status } from '@/types/status'
 
-interface MenuContextInterface {
+type MenuContextInterface = {
   showMenu: boolean
   setShowMenu: (show: boolean) => void
 }
-interface NewIssueModalContextInterface {
+type NewIssueModalContextInterface = {
   newIssueModalStatus: Status | boolean
   setNewIssueModalStatus: (status: Status | false) => void
 }

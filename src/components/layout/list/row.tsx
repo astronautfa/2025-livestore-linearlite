@@ -1,6 +1,6 @@
 import { useStore } from '@livestore/react'
 import type { CSSProperties } from 'react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@/components/common/avatar'
 import { PriorityMenu } from '@/components/common/priority-menu'

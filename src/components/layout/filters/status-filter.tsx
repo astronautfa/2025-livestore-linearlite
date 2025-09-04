@@ -8,7 +8,9 @@ import type { Status } from '@/types/status'
 
 export const StatusFilter = () => {
   const [filterState, setFilterState] = useFilterState()
-  if (!filterState.status) return null
+  if (!filterState.status) {
+    return null
+  }
 
   return (
     <div className="ml-2 flex h-6 shrink-0 overflow-hidden whitespace-nowrap rounded-md border border-neutral-300 text-neutral-500 text-xs dark:border-neutral-600 dark:text-neutral-400">

@@ -8,7 +8,9 @@ import type { Priority } from '@/types/priority'
 
 export const PriorityFilter = () => {
   const [filterState, setFilterState] = useFilterState()
-  if (!filterState.priority) return null
+  if (!filterState.priority) {
+    return null
+  }
 
   return (
     <div className="ml-2 flex h-6 shrink-0 overflow-hidden whitespace-nowrap rounded-md border border-neutral-300 text-neutral-500 text-xs dark:border-neutral-600 dark:text-neutral-400">

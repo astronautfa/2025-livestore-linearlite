@@ -10,7 +10,9 @@ export const SearchBar = () => {
 
   const { keyboardProps } = useKeyboard({
     onKeyDown: (e) => {
-      if (e.key === 'Escape') (e.target as HTMLInputElement)?.blur()
+      if (e.key === 'Escape') {
+        ;(e.target as HTMLInputElement)?.blur()
+      }
     },
   })
 

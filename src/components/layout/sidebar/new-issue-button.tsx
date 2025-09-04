@@ -1,4 +1,5 @@
 import { PlusIcon } from '@heroicons/react/20/solid'
+import React from 'react'
 import { Button } from 'react-aria-components'
 import { MenuContext, NewIssueModalContext } from '@/app/contexts'
 import { Icon } from '@/components/icons'

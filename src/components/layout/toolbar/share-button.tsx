@@ -1,4 +1,5 @@
 import { CheckIcon, LinkIcon, QrCodeIcon } from '@heroicons/react/16/solid'
+import React from 'react'
 import { Button, ModalOverlay, Modal as ReactAriaModal } from 'react-aria-components'
 
 // This uses a public QR code API: https://goqr.me/api/doc/create-qr-code/

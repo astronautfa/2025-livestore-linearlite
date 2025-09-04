@@ -1,10 +1,13 @@
 import { XMarkIcon } from '@heroicons/react/20/solid'
+import React from 'react'
 import { Button } from 'react-aria-components'
 
 export const BackButton = ({ close }: { close: () => void }) => {
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close()
+      if (e.key === 'Escape') {
+        close()
+      }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)

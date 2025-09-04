@@ -1,4 +1,5 @@
 import { XMarkIcon } from '@heroicons/react/20/solid'
+import React from 'react'
 import { Button, Heading, ModalOverlay, Modal as ReactAriaModal } from 'react-aria-components'
 
 export const Modal = ({

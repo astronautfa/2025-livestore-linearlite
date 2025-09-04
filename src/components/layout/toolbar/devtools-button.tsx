@@ -1,5 +1,6 @@
 import { CodeBracketIcon } from '@heroicons/react/16/solid'
 import { useStore } from '@livestore/react'
+import React from 'react'
 
 export const DevtoolsButton = ({ className }: { className?: string }) => {
   const { store } = useStore()

@@ -1,20 +1,25 @@
 import { EditorContent, type Extensions, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Markdown } from 'tiptap-markdown'
+
+// Type for editor with markdown extension
+type MarkdownStorage = {
+  markdown: {
+    getMarkdown: () => string
+  }
+}
 
 const Editor = ({
   value,
   onBlur,
   onChange,
   className = '',
-  placeholder,
 }: {
   value: string
   onBlur?: (value: string) => void
   onChange?: (value: string) => void
   className?: string
-  placeholder?: string
 }) => {
   const extensions: Extensions = [StarterKit, Markdown]
 
@@ -27,22 +32,22 @@ const Editor = ({
     },
     content: value || undefined,
     onBlur: onBlur
-      ? ({ editor }) => {
-          const markdown = editor.storage.markdown.getMarkdown()
+      ? ({ editor: blurEditor }) => {
+          const markdown = (blurEditor.storage as unknown as MarkdownStorage).markdown.getMarkdown()
           onBlur(markdown || '')
         }
       : undefined,
     onUpdate: onChange
-      ? ({ editor }) => {
-          const markdown = editor.storage.markdown.getMarkdown()
+      ? ({ editor: updateEditor }) => {
+          const markdown = (updateEditor.storage as unknown as MarkdownStorage).markdown.getMarkdown()
           onChange(markdown || '')
         }
       : undefined,
   })
 
   useEffect(() => {
-    if (editor && value !== editor.storage.markdown.getMarkdown()) {
-      editor.commands.setContent(value)
+    if (value !== (editor?.storage as unknown as MarkdownStorage).markdown.getMarkdown()) {
+      editor?.commands.setContent(value)
     }
   }, [value, editor])
 

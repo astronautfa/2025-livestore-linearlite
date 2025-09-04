@@ -1,4 +1,5 @@
 import { ArrowsUpDownIcon, BarsArrowDownIcon, BarsArrowUpIcon } from '@heroicons/react/20/solid'
+import React from 'react'
 import { useKeyboard } from 'react-aria'
 import { Button, Header, Menu, MenuItem, MenuSection, MenuTrigger, Popover } from 'react-aria-components'
 import { Shortcut } from '@/components/common/shortcut'
@@ -12,13 +13,14 @@ export const SortMenu = ({ type }: { type?: 'status' | 'priority' }) => {
   const toggleSorting = (sortingOption: SortingOption) => {
     const currentSorting = filterState.orderBy
     const currentDirection = filterState.orderDirection
-    if (currentSorting === sortingOption)
+    if (currentSorting === sortingOption) {
       setFilterState({ orderDirection: currentDirection === 'asc' ? 'desc' : 'asc' })
-    else
+    } else {
       setFilterState({
         orderBy: sortingOption,
         orderDirection: sortingOptions[sortingOption as SortingOption].defaultDirection as SortingDirection,
       })
+    }
   }
 
   const { keyboardProps } = useKeyboard({
@@ -27,12 +29,12 @@ export const SortMenu = ({ type }: { type?: 'status' | 'priority' }) => {
         setIsOpen(false)
         return
       }
-      Object.entries(sortingOptions).forEach(([sortingOption, { shortcut }]) => {
+      for (const [sortingOption, { shortcut }] of Object.entries(sortingOptions)) {
         if (e.key === shortcut) {
           toggleSorting(sortingOption as SortingOption)
-          return
+          break
         }
-      })
+      }
     },
   })
 
@@ -60,12 +62,10 @@ export const SortMenu = ({ type }: { type?: 'status' | 'priority' }) => {
                   >
                     <span>{name}</span>
                     {filterState.orderBy === sortingOption && (
-                      <>
-                        <div className="absolute right-10">
-                          {filterState.orderDirection === 'asc' && <BarsArrowDownIcon className="size-4" />}
-                          {filterState.orderDirection === 'desc' && <BarsArrowUpIcon className="size-4" />}
-                        </div>
-                      </>
+                      <div className="absolute right-10">
+                        {filterState.orderDirection === 'asc' && <BarsArrowDownIcon className="size-4" />}
+                        {filterState.orderDirection === 'desc' && <BarsArrowUpIcon className="size-4" />}
+                      </div>
                     )}
                     <Shortcut className="absolute right-3" keys={[shortcut]} />
                   </MenuItem>

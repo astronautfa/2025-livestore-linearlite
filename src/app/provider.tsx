@@ -34,7 +34,9 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const element = e.target as HTMLElement
-      if (element.classList.contains('input')) return
+      if (element.classList.contains('input')) {
+        return
+      }
       if (e.key === 'c' && !element.classList.contains('input')) {
         setNewIssueModalStatus(0)
         e.preventDefault()
