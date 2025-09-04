@@ -1,17 +1,16 @@
 import { Bars4Icon, ViewColumnsIcon } from '@heroicons/react/24/outline'
 import React from 'react'
-import { useNavigate } from '@tanstack/react-router'
+import { Link, useSearch } from '@tanstack/react-router'
 import { MenuContext } from '@/app/contexts'
 import { AboutMenu } from '@/components/layout/sidebar/about-menu'
 import { NewIssueButton } from '@/components/layout/sidebar/new-issue-button'
 import { SearchButton } from '@/components/layout/sidebar/search-button'
 import { ThemeButton } from '@/components/layout/sidebar/theme-button'
 import { ToolbarButton } from '@/components/layout/toolbar/toolbar-button'
-import { useFilterState } from '@/lib/livestore/queries'
+import type { ValidatedSearch } from '@/routes/index'
 
 export const Sidebar = ({ className }: { className?: string }) => {
-  const [, setFilterState] = useFilterState()
-  const navigate = useNavigate()
+  const searchParams = useSearch({ strict: false }) as ValidatedSearch
   const menuContext = React.useContext(MenuContext)
   const setShowMenu =
     menuContext?.setShowMenu ||
@@ -24,13 +23,11 @@ export const Sidebar = ({ className }: { className?: string }) => {
       title: 'List view',
       icon: Bars4Icon,
       href: '/',
-      onClick: () => setFilterState({ status: null }),
     },
     {
       title: 'Board view',
       icon: ViewColumnsIcon,
       href: '/board',
-      onClick: () => setFilterState({ status: null }),
     },
   ]
 
@@ -50,19 +47,17 @@ export const Sidebar = ({ className }: { className?: string }) => {
           Issues
         </h2>
         <nav className="space-y-px text-sm leading-none">
-          {navItems.map(({ title, icon: Icon, href, onClick }) => (
-            <button
-              className="flex h-8 w-full items-center gap-2 rounded-md px-2 text-left hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
+          {navItems.map(({ title, icon: Icon, href }) => (
+            <Link
               key={href}
-              onClick={() => {
-                onClick()
-                setShowMenu(false)
-                navigate({ to: href })
-              }}
+              to={href}
+              search={searchParams}
+              className="flex h-8 w-full items-center gap-2 rounded-md px-2 text-left hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
+              onClick={() => setShowMenu(false)}
             >
               <Icon className="size-4" />
               <span>{title}</span>
-            </button>
+            </Link>
           ))}
         </nav>
       </div>

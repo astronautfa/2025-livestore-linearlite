@@ -1,4 +1,5 @@
 import { useStore } from '@livestore/react'
+import { useSearch } from '@tanstack/react-router'
 import { Button } from 'react-aria-components'
 import { Icon } from '@/components/icons'
 import { FilterMenu } from '@/components/layout/filters/filter-menu'
@@ -8,8 +9,9 @@ import { SortMenu } from '@/components/layout/filters/sort-menu'
 import { StatusFilter } from '@/components/layout/filters/status-filter'
 import { SearchBar } from '@/components/layout/search/search-bar'
 import { statusOptions } from '@/data/status-options'
-import { issueCount$, useFilterState } from '@/lib/livestore/queries'
+import { issueCount$ } from '@/lib/livestore/queries'
 import type { Status } from '@/types/status'
+import type { ValidatedSearch } from '@/routes/index'
 
 export const Filters = ({
   filteredCount,
@@ -24,7 +26,7 @@ export const Filters = ({
 }) => {
   const { store } = useStore()
   const totalCount = store.useQuery(issueCount$)
-  const [filterState] = useFilterState()
+  const searchParams = useSearch({ strict: false }) as ValidatedSearch
 
   return (
     <>
@@ -34,8 +36,8 @@ export const Filters = ({
         <Header
           filteredCount={filteredCount}
           heading={
-            filterState?.status?.length === 1
-              ? statusOptions[filterState.status[0] as Status]?.name || 'Issues'
+            searchParams?.status?.length === 1
+              ? statusOptions[searchParams.status[0] as Status]?.name || 'Issues'
               : 'Issues'
           }
           totalCount={totalCount}
@@ -56,7 +58,7 @@ export const Filters = ({
               className="group flex h-6 min-w-6 items-center justify-center gap-1.5 rounded-lg px-1.5 font-medium text-xs hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
             >
               <Icon className="size-3.5" name="filter" />
-              <span className={filterState.status?.length || filterState.priority?.length ? 'lg:hidden' : ''}>
+              <span className={searchParams.status?.length || searchParams.priority?.length ? 'lg:hidden' : ''}>
                 Filter
               </span>
             </Button>
@@ -69,7 +71,7 @@ export const Filters = ({
         {/* TODO add clear filters/sorting button */}
         {!hideSorting && <SortMenu />}
       </div>
-      {filterState.status?.length || filterState.priority?.length ? (
+      {searchParams.status?.length || searchParams.priority?.length ? (
         <div className="h-12 overflow-x-auto border-neutral-200 border-b lg:hidden dark:border-neutral-700">
           <div className="flex h-full items-center pl-2">
             {!hideStatusFilter && <StatusFilter />}

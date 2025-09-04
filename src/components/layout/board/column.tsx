@@ -1,5 +1,6 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
+import { useSearch } from '@tanstack/react-router'
 import { generateKeyBetween } from 'fractional-indexing'
 import React from 'react'
 import {
@@ -17,24 +18,33 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 import { Icon } from '@/components/icons'
 import { NewIssueButton } from '@/components/layout/sidebar/new-issue-button'
 import type { StatusDetails } from '@/data/status-options'
-import { filterState$, useDebouncedScrollState, useFilterState } from '@/lib/livestore/queries'
+import { useDebouncedScrollState } from '@/lib/livestore/queries'
 import { events, tables } from '@/lib/livestore/schema'
 import { filterStateToWhere } from '@/lib/livestore/utils'
 import type { Status } from '@/types/status'
+import type { ValidatedSearch } from '@/routes/board'
 import { Card } from './card'
 
 export const Column = ({ status, statusDetails }: { status: Status; statusDetails: StatusDetails }) => {
   const { store } = useStore()
+  const searchParams = useSearch({ strict: false }) as ValidatedSearch
   // TODO restore initial scroll position once React Aria supports this scenario
   const [_scrollState, setScrollState] = useDebouncedScrollState(`column-${status}-${store.sessionId}`)
-  const [filterState] = useFilterState()
 
   const filteredIssues$ = queryDb(
-    (get) =>
-      tables.issue
+    (get) => {
+      const filterState = {
+        orderBy: searchParams.orderBy || 'created',
+        orderDirection: searchParams.orderDirection || 'desc',
+        status: searchParams.status || null,
+        priority: searchParams.priority || null,
+        query: searchParams.query || null,
+      }
+      return tables.issue
         .select()
-        .where({ priority: filterStateToWhere(get(filterState$))?.priority, status, deleted: null })
-        .orderBy('kanbanorder', 'desc'),
+        .where({ priority: filterStateToWhere(filterState)?.priority, status, deleted: null })
+        .orderBy('kanbanorder', 'desc')
+    },
     { label: 'List.visibleIssues', deps: [status] },
   )
   const filteredIssues = store.useQuery(filteredIssues$)
@@ -52,7 +62,7 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
         .select('kanbanorder')
         .where({
           status,
-          priority: filterState.priority ? { op: 'IN', value: filterState.priority } : undefined,
+          priority: searchParams.priority ? { op: 'IN', value: searchParams.priority } : undefined,
           kanbanorder: { op: before ? '>' : '<', value: targetKanbanOrder },
         })
         .orderBy('kanbanorder', before ? 'asc' : 'desc')

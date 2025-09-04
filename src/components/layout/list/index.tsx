@@ -1,22 +1,37 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
+import { useSearch } from '@tanstack/react-router'
 import { Filters } from '@/components/layout/filters'
 import { FilteredList } from '@/components/layout/list/filtered-list'
-import { filterState$ } from '@/lib/livestore/queries'
 import { tables } from '@/lib/livestore/schema'
 import { filterStateToOrderBy, filterStateToWhere } from '@/lib/livestore/utils'
+import type { ValidatedSearch } from '@/routes/index'
 
-const filteredIssueIds$ = queryDb(
-  (get) =>
-    tables.issue
-      .select('id')
-      .where({ ...filterStateToWhere(get(filterState$)), deleted: null })
-      .orderBy(filterStateToOrderBy(get(filterState$))),
-  { label: 'List.visibleIssueIds' },
-)
+// Convert search params to filter state format for the utility functions
+const searchToFilterState = (search: ValidatedSearch) => ({
+  orderBy: search.orderBy || 'created',
+  orderDirection: search.orderDirection || 'desc',
+  status: search.status || null,
+  priority: search.priority || null,
+  query: search.query || null,
+})
 
 export const List = () => {
   const { store } = useStore()
+  const searchParams = useSearch({ strict: false }) as ValidatedSearch
+
+  // Create a reactive query that uses search params directly
+  const filteredIssueIds$ = queryDb(
+    () => {
+      const filterState = searchToFilterState(searchParams)
+      return tables.issue
+        .select('id')
+        .where({ ...filterStateToWhere(filterState), deleted: null })
+        .orderBy(filterStateToOrderBy(filterState))
+    },
+    { label: 'List.visibleIssueIds' },
+  )
+
   const filteredIssueIds = store.useQuery(filteredIssueIds$)
 
   return (

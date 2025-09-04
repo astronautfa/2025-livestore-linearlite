@@ -1,12 +1,14 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import { useKeyboard } from 'react-aria'
-import { Button, Input } from 'react-aria-components'
+import { Input } from 'react-aria-components'
+import { Link, useSearch, useNavigate } from '@tanstack/react-router'
 import { MenuButton } from '@/components/common/menu-button'
-import { useFilterState } from '@/lib/livestore/queries'
+import type { ValidatedSearch } from '@/routes/index'
 
 export const SearchBar = () => {
-  const [filterState, setFilterState] = useFilterState()
+  const searchParams = useSearch({ strict: false }) as ValidatedSearch
+  const navigate = useNavigate()
 
   const { keyboardProps } = useKeyboard({
     onKeyDown: (e) => {
@@ -16,6 +18,18 @@ export const SearchBar = () => {
     },
   })
 
+  const handleSearchChange = (value: string) => {
+    const newQuery = value || undefined
+    navigate({
+      to: '.',
+      search: (prev: ValidatedSearch) => ({
+        ...prev,
+        query: newQuery,
+      }),
+      replace: true,
+    })
+  }
+
   return (
     <div className="relative flex h-12 shrink-0 items-center border-neutral-200 border-b p-2 text-sm lg:pl-6 dark:border-neutral-700">
       <MenuButton className="lg:hidden" />
@@ -23,20 +37,24 @@ export const SearchBar = () => {
       <Input
         autoFocus
         className="input w-full border-none bg-transparent pl-2 placholder:text-neutral-400 text-neutral-800 text-sm focus:outline-none focus:ring-0 lg:pl-3 dark:text-neutral-200 dark:placeholder:text-neutral-500"
-        onChange={(e) => setFilterState({ query: e.target.value })}
+        onChange={(e) => handleSearchChange(e.target.value)}
         placeholder="Search issues..."
         type="text"
-        value={filterState.query ?? ''}
+        value={searchParams.query ?? ''}
         {...keyboardProps}
       />
-      {filterState.query && (
-        <Button
-          aria-label="Clear search query"
+      {searchParams.query && (
+        <Link
+          to="."
+          search={(prev: ValidatedSearch) => ({
+            ...prev,
+            query: undefined,
+          })}
           className="absolute right-2 flex size-8 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-100"
-          onPress={() => setFilterState({ query: null })}
+          aria-label="Clear search query"
         >
           <XMarkIcon className="size-5" />
-        </Button>
+        </Link>
       )}
     </div>
   )
