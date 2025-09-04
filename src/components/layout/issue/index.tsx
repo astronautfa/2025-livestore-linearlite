@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { useNavigate, useParams } from '@tanstack/react-router'
 import { Avatar } from '@/components/common/avatar'
 import { MenuButton } from '@/components/common/menu-button'
@@ -58,7 +58,7 @@ export const Issue = () => {
           <Button
             aria-label="Back to issues"
             className="ml-2 font-medium hover:text-neutral-800 focus:outline-none lg:ml-0 dark:hover:text-neutral-100"
-            onPress={close}
+            onClick={close}
           >
             Issues
           </Button>

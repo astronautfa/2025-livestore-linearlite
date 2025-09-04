@@ -1,6 +1,5 @@
-import { XMarkIcon } from '@heroicons/react/20/solid'
 import React from 'react'
-import { Button, Heading, ModalOverlay, Modal as ReactAriaModal } from 'react-aria-components'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 export const Modal = ({
   show,
@@ -24,29 +23,20 @@ export const Modal = ({
   }, [setShow])
 
   return (
-    <ModalOverlay
-      className="fixed inset-0 flex items-start justify-center bg-black/10 p-4 pt-16 lg:pt-32 dark:bg-black/20"
-      isDismissable
-      isOpen={show}
-      onOpenChange={setShow}
-    >
-      <ReactAriaModal className="relative w-full max-w-xl rounded-xl border border-neutral-200 bg-white shadow-lg dark:border-neutral-700 dark:bg-neutral-800">
+    <Dialog open={show} onOpenChange={setShow}>
+      <DialogContent
+        className="w-full max-w-xl rounded-xl border border-neutral-200 bg-white shadow-lg dark:border-neutral-700 dark:bg-neutral-800"
+        style={{ animation: 'none' }}
+      >
         {title && (
           <div className="flex items-center justify-between border-neutral-200 border-b p-2 pl-4 dark:border-neutral-700">
-            <Heading className="font-bold text-lg" slot="title">
+            <DialogTitle className="font-bold text-lg">
               {title}
-            </Heading>
+            </DialogTitle>
           </div>
         )}
         {children}
-        <Button
-          className="absolute top-2 right-2 flex size-8 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-700 focus:outline-none dark:hover:bg-neutral-700"
-          onPress={() => setShow(false)}
-          slot="close"
-        >
-          <XMarkIcon className="size-5" />
-        </Button>
-      </ReactAriaModal>
-    </ModalOverlay>
+      </DialogContent>
+    </Dialog>
   )
 }

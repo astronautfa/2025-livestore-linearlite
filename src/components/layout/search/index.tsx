@@ -4,7 +4,7 @@ import { useSearch } from '@tanstack/react-router'
 import { Filters } from '@/components/layout/filters'
 import { FilteredList } from '@/components/layout/list/filtered-list'
 import { tables } from '@/lib/livestore/schema'
-import { filterStateToOrderBy, filterStateToWhere } from '@/lib/livestore/utils'
+import { filterStateToOrderBy, filterStateToWhere } from '@/utils'
 import type { ValidatedSearch } from '@/routes/search'
 
 // Convert search params to filter state format for the utility functions

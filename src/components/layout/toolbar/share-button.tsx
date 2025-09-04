@@ -1,6 +1,7 @@
 import { CheckIcon, LinkIcon, QrCodeIcon } from '@heroicons/react/16/solid'
 import React from 'react'
-import { Button, ModalOverlay, Modal as ReactAriaModal } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 // This uses a public QR code API: https://goqr.me/api/doc/create-qr-code/
 
@@ -26,7 +27,7 @@ export const ShareButton = ({ className }: { className?: string }) => {
         <Button
           aria-label="Copy workspace URL"
           className="flex h-6 items-center gap-1 whitespace-nowrap rounded bg-neutral-800 px-1.5 hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none"
-          onPress={copyUrl}
+          onClick={copyUrl}
         >
           {copied ? (
             <>
@@ -48,18 +49,14 @@ export const ShareButton = ({ className }: { className?: string }) => {
         <Button
           aria-label="Copy workspace URL"
           className="flex size-6 items-center justify-center rounded bg-neutral-800 hover:bg-neutral-700 focus:bg-neutral-800 focus:outline-none"
-          onPress={() => setShowQR(true)}
+          onClick={() => setShowQR(true)}
         >
           <QrCodeIcon className="size-3.5" />
         </Button>
       </div>
-      <ModalOverlay
-        className="fixed inset-0 bottom-12 flex items-start justify-center bg-black/10 p-4 pt-16 lg:pt-32 dark:bg-black/20"
-        isDismissable
-        isOpen={showQR}
-        onOpenChange={setShowQR}
-      >
-        <ReactAriaModal className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-4 shadow-lg">
+      <Dialog open={showQR} onOpenChange={setShowQR}>
+        <DialogContent className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-4 shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
+          <DialogTitle className="sr-only">QR Code</DialogTitle>
           <img
             alt="QR code for sharing workspace URL"
             crossOrigin="anonymous"
@@ -67,8 +64,8 @@ export const ShareButton = ({ className }: { className?: string }) => {
             src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURI(window.location.href)}`}
             width="200"
           />
-        </ReactAriaModal>
-      </ModalOverlay>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

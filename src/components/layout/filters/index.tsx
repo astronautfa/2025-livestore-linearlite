@@ -1,6 +1,6 @@
 import { useStore } from '@livestore/react'
 import { useSearch } from '@tanstack/react-router'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/icons'
 import { FilterMenu } from '@/components/layout/filters/filter-menu'
 import { Header } from '@/components/layout/filters/header'

@@ -1,6 +1,6 @@
 import { ArrowsUpDownIcon, BarsArrowDownIcon, BarsArrowUpIcon } from '@heroicons/react/20/solid'
 import React from 'react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { Link, useSearch } from '@tanstack/react-router'
 import { Shortcut } from '@/components/common/shortcut'
 import { useClickOutside } from '@/hooks/useClickOutside'
@@ -38,7 +38,7 @@ export const SortMenu = () => {
       <Button
         aria-label="Select sorting"
         className="group relative flex h-6 min-w-6 items-center justify-center gap-1.5 rounded-lg px-1.5 font-medium text-xs hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
-        onPress={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <ArrowsUpDownIcon className="size-3.5" />
         <span>Sort</span>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch } from 'react-aria-components'
+import { Switch } from '@/components/ui/switch'
 
 export const SyncToggle = ({ className }: { className?: string }) => {
   // TODO hook up actual sync/network state
@@ -11,9 +11,9 @@ export const SyncToggle = ({ className }: { className?: string }) => {
       <Switch
         aria-label="Toggle sync/network"
         className="group flex h-6 cursor-pointer items-center gap-2 rounded bg-neutral-800 pr-1.5 pl-1 hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none"
-        isDisabled={true}
-        isSelected={sync} // TODO enable when sync is implemented
-        onChange={setSync}
+        disabled={true}
+        checked={sync} // TODO enable when sync is implemented
+        onCheckedChange={setSync}
       >
         <div className="h-4 w-6 rounded-full bg-neutral-600 p-px transition-colors group-data-[selected]:bg-orange-500">
           <span className="block size-3.5 rounded-full bg-white transition-transform group-data-[selected]:translate-x-2" />

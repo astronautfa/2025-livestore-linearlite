@@ -1,7 +1,7 @@
 import { TrashIcon } from '@heroicons/react/16/solid'
 import { useStore } from '@livestore/react'
 import React from 'react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { events } from '@/lib/livestore/schema'
 
 const DELETE_CONFIRMATION_TIMEOUT_MS = 2000
@@ -39,7 +39,7 @@ export const DeleteButton = ({
     <Button
       aria-label="Delete issue"
       className={`flex h-8 min-w-8 items-center justify-center rounded-lg px-2 hover:bg-neutral-100 hover:text-red-600 focus:bg-neutral-100 focus:text-red-600 focus:outline-none dark:focus:bg-neutral-800 dark:focus:text-red-500 dark:hover:bg-neutral-800 dark:hover:text-red-500 ${className}`}
-      onPress={onClick}
+      onClick={onClick}
     >
       <TrashIcon className="size-3.5" />
       {confirm && (

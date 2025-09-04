@@ -1,6 +1,6 @@
 import React from 'react'
 import { CheckIcon } from '@heroicons/react/16/solid'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { Link, useSearch } from '@tanstack/react-router'
 import { Icon, type IconName } from '@/components/icons'
 import { useClickOutside } from '@/hooks/useClickOutside'
@@ -38,13 +38,13 @@ export const FilterMenu = ({ type, children }: { type?: 'status' | 'priority'; c
   // Clone children and add click handler if it's a React element
   const triggerElement = React.isValidElement(children) ? (
     React.cloneElement(children as React.ReactElement<any>, {
-      onPress: () => setIsOpen(!isOpen),
+      onClick: () => setIsOpen(!isOpen),
     })
   ) : (
     <Button
       aria-label="Select filters"
       className="group flex h-6 min-w-6 items-center justify-center gap-1.5 rounded-lg px-1.5 font-medium text-xs hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
-      onPress={() => setIsOpen(!isOpen)}
+      onClick={() => setIsOpen(!isOpen)}
     >
       <Icon className="size-3.5" name="filter" />
       <span>Filter</span>

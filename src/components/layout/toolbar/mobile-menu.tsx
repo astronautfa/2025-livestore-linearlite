@@ -1,5 +1,6 @@
 import { ChevronUpIcon } from '@heroicons/react/16/solid'
-import { Button, DialogTrigger, ModalOverlay, Modal as ReactAriaModal } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
+import { DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ResetButton } from '@/components/layout/toolbar/reset-button'
 import { SeedInput } from '@/components/layout/toolbar/seed-input'
 import { UserInput } from '@/components/layout/toolbar/user-input'
@@ -17,23 +18,18 @@ export const MobileMenu = () => {
           <span>Tools</span>
           <ChevronUpIcon className="size-4" />
         </Button>
-        <ModalOverlay
-          className="fixed inset-0 bottom-10 flex flex-col justify-end bg-black/10 dark:bg-black/20"
-          isDismissable
-        >
-          <ReactAriaModal className="w-full border-neutral-700 border-t bg-neutral-950 px-2">
-            <div className="flex flex-col items-stretch border-neutral-700 border-x">
-              <div className="border-neutral-700 border-b px-2 py-4 text-neutral-400 text-sm">
-                Please use the desktop version to access all LiveStore tools!
-              </div>
-              <UserInput />
-              <SeedInput />
-              <ResetButton />
-              <ShareButton />
-              <SyncToggle />
+        <DialogContent className="w-full border-neutral-700 border-t bg-neutral-950 px-2 fixed bottom-0 left-0 right-0">
+          <div className="flex flex-col items-stretch border-neutral-700 border-x">
+            <div className="border-neutral-700 border-b px-2 py-4 text-neutral-400 text-sm">
+              Please use the desktop version to access all LiveStore tools!
             </div>
-          </ReactAriaModal>
-        </ModalOverlay>
+            <UserInput />
+            <SeedInput />
+            <ResetButton />
+            <ShareButton />
+            <SyncToggle />
+          </div>
+        </DialogContent>
       </DialogTrigger>
     </div>
   )

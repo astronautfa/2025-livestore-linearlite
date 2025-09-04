@@ -1,26 +1,11 @@
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
 import { useSearch } from '@tanstack/react-router'
-import { generateKeyBetween } from 'fractional-indexing'
-import React from 'react'
-import {
-  DropIndicator,
-  type DropPosition,
-  type DroppableCollectionReorderEvent,
-  GridList,
-  GridListItem,
-  isTextDropItem,
-  ListLayout,
-  useDragAndDrop,
-  Virtualizer,
-} from 'react-aria-components'
-import AutoSizer from 'react-virtualized-auto-sizer'
 import { Icon } from '@/components/icons'
 import { NewIssueButton } from '@/components/layout/sidebar/new-issue-button'
 import type { StatusDetails } from '@/data/status-options'
-import { useDebouncedScrollState } from '@/lib/livestore/queries'
-import { events, tables } from '@/lib/livestore/schema'
-import { filterStateToWhere } from '@/lib/livestore/utils'
+import { tables } from '@/lib/livestore/schema'
+import { filterStateToWhere } from '@/utils'
 import type { Status } from '@/types/status'
 import type { ValidatedSearch } from '@/routes/board'
 import { Card } from './card'
@@ -28,11 +13,8 @@ import { Card } from './card'
 export const Column = ({ status, statusDetails }: { status: Status; statusDetails: StatusDetails }) => {
   const { store } = useStore()
   const searchParams = useSearch({ strict: false }) as ValidatedSearch
-  // TODO restore initial scroll position once React Aria supports this scenario
-  const [_scrollState, setScrollState] = useDebouncedScrollState(`column-${status}-${store.sessionId}`)
-
   const filteredIssues$ = queryDb(
-    (get) => {
+    () => {
       const filterState = {
         orderBy: searchParams.orderBy || 'created',
         orderDirection: searchParams.orderDirection || 'desc',
@@ -49,69 +31,7 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
   )
   const filteredIssues = store.useQuery(filteredIssues$)
 
-  const getNewKanbanOrder = (targetId: string, dropPosition: DropPosition) => {
-    const before = dropPosition !== 'after'
-    const targetKanbanOrder = store.query(
-      tables.issue
-        .select('kanbanorder')
-        .where({ id: Number(targetId) })
-        .first(),
-    )
-    const nearestKanbanOrder = store.query(
-      tables.issue
-        .select('kanbanorder')
-        .where({
-          status,
-          priority: searchParams.priority ? { op: 'IN', value: searchParams.priority } : undefined,
-          kanbanorder: { op: before ? '>' : '<', value: targetKanbanOrder },
-        })
-        .orderBy('kanbanorder', before ? 'asc' : 'desc')
-        .limit(1),
-    )[0]
-    return generateKeyBetween(
-      before ? targetKanbanOrder : nearestKanbanOrder,
-      before ? nearestKanbanOrder : targetKanbanOrder,
-    )
-  }
 
-  const { dragAndDropHooks } = useDragAndDrop({
-    getItems: (keys) => [...keys].map((key) => ({ 'text/plain': key.toString() })),
-    onReorder: (e: DroppableCollectionReorderEvent) => {
-      const items = [...e.keys]
-      const kanbanorder = getNewKanbanOrder(e.target.key as string, e.target.dropPosition)
-      store.commit(events.updateIssueKanbanOrder({ id: Number(items[0]), status, kanbanorder, modified: new Date() }))
-    },
-    onInsert: async (e) => {
-      const items = await Promise.all(
-        e.items.filter(isTextDropItem).map(async (item) => JSON.parse(await item.getText('text/plain')).toString()),
-      )
-      const kanbanorder = getNewKanbanOrder(e.target.key as string, e.target.dropPosition)
-      store.commit(events.updateIssueKanbanOrder({ id: Number(items[0]), status, kanbanorder, modified: new Date() }))
-    },
-    onRootDrop: async (e) => {
-      const items = await Promise.all(
-        e.items.filter(isTextDropItem).map(async (item) => JSON.parse(await item.getText('text/plain')).toString()),
-      )
-      const lowestKanbanOrder = store.query(
-        tables.issue.select('kanbanorder').where({ status }).orderBy('kanbanorder', 'asc').limit(1),
-      )[0]
-      const kanbanorder = lowestKanbanOrder ? generateKeyBetween(null, lowestKanbanOrder) : 'a1'
-      store.commit(events.updateIssueKanbanOrder({ id: Number(items[0]), status, kanbanorder, modified: new Date() }))
-    },
-    renderDropIndicator: (target) => {
-      return <DropIndicator className="mx-3.5 h-1 rounded-full bg-orange-500" target={target} />
-    },
-    getDropOperation: () => 'move',
-  })
-
-  const layout = React.useMemo(
-    () =>
-      new ListLayout({
-        rowHeight: 124,
-        dropIndicatorThickness: 15,
-      }),
-    [],
-  )
 
   return (
     <div className="flex h-full w-64 shrink-0 flex-col rounded-lg border border-neutral-100 bg-neutral-50 lg:w-80 dark:border-neutral-700/50 dark:bg-neutral-800">
@@ -122,31 +42,12 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
         </div>
         <NewIssueButton status={status} />
       </div>
-      <div className="grow">
-        <AutoSizer>
-          {({ width, height }: { width: number; height: number }) => (
-            <Virtualizer layout={layout}>
-              <GridList
-                aria-label={`Issues with status ${statusDetails.name}`}
-                className="overflow-y-auto pt-2"
-                dragAndDropHooks={dragAndDropHooks}
-                items={filteredIssues}
-                onScroll={(e) => setScrollState({ list: (e.target as HTMLElement).scrollTop })}
-                style={{ width, height }}
-              >
-                {(issue) => (
-                  <GridListItem
-                    aria-label={`Issue ${issue.id}: ${issue.title}`}
-                    className="group w-full px-2 focus:outline-none data-[dragging]:opacity-50"
-                    textValue={issue.id.toString()}
-                  >
-                    <Card issue={issue} />
-                  </GridListItem>
-                )}
-              </GridList>
-            </Virtualizer>
-          )}
-        </AutoSizer>
+      <div className="grow overflow-y-auto pt-2">
+        {filteredIssues.map((issue) => (
+          <div key={issue.id} className="group w-full px-2 focus:outline-none">
+            <Card issue={issue} />
+          </div>
+        ))}
       </div>
     </div>
   )

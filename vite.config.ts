@@ -32,14 +32,14 @@ export default defineConfig({
     react(),
     tailwindcss(),
     livestoreDevtoolsPlugin({ schemaPath: './src/lib/livestore/schema/index.ts' }),
-    svgr({
-      svgrOptions: {
-        svgo: true,
-        plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
-        svgoConfig: {
-          plugins: ['preset-default', 'removeTitle', 'removeDesc', 'removeDoctype', 'cleanupIds'],
-        },
-      },
-    }),
+    // svgr({
+    //   svgrOptions: {
+    //     svgo: true,
+    //     plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+    //     svgoConfig: {
+    //       plugins: ['preset-default', 'removeTitle', 'removeDesc', 'removeDoctype', 'cleanupIds'],
+    //     },
+    //   },
+    // }),
   ],
 })

@@ -1,6 +1,6 @@
 import { TrashIcon } from '@heroicons/react/16/solid'
 import React from 'react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { useNavigate } from '@tanstack/react-router'
 
 const CONFIRM_TIMEOUT_MS = 2000
@@ -25,7 +25,7 @@ export const ResetButton = ({ className }: { className?: string }) => {
       <Button
         aria-label="Reset database"
         className={`flex h-6 items-center gap-1 rounded bg-neutral-800 px-1.5 hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none ${confirm ? 'text-red-500' : 'text-neutral-400'}`}
-        onPress={onClick}
+        onClick={onClick}
       >
         <TrashIcon className="size-3 shrink-0" />
         <span>{confirm ? 'Confirm' : 'Reset'}</span>

@@ -6,7 +6,7 @@ import { unstable_batchedUpdates as batchUpdates } from 'react-dom'
 import { useNavigate } from '@tanstack/react-router'
 import { MenuContext, NewIssueModalContext } from '@/app/contexts'
 import { schema } from '@/lib/livestore/schema'
-import { renderBootStatus } from '@/lib/livestore/utils'
+import { renderBootStatus } from '@/utils'
 import LiveStoreWorker from '@/lib/livestore/worker?worker'
 import type { Status } from '@/types/status'
 

@@ -1,7 +1,8 @@
 import { PlusIcon } from '@heroicons/react/16/solid'
 import { useStore } from '@livestore/react'
 import React from 'react'
-import { Button, Input } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { seed } from '@/lib/livestore/seed'
 
 export const SeedInput = ({ className }: { className?: string }) => {
@@ -29,7 +30,7 @@ export const SeedInput = ({ className }: { className?: string }) => {
       <Button
         aria-label="Seed database"
         className="flex h-6 items-center gap-1 rounded-r bg-neutral-800 pr-1.5 pl-1 hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none"
-        onPress={onClick}
+        onClick={onClick}
       >
         <PlusIcon className="size-3" />
         <span>Seed</span>

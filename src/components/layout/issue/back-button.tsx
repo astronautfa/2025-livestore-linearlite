@@ -1,6 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import React from 'react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 
 export const BackButton = ({ close }: { close: () => void }) => {
   React.useEffect(() => {
@@ -17,7 +17,7 @@ export const BackButton = ({ close }: { close: () => void }) => {
     <Button
       aria-label="Back to issues"
       className="flex size-8 shrink-0 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
-      onPress={close}
+      onClick={close}
     >
       <XMarkIcon className="size-5" />
     </Button>

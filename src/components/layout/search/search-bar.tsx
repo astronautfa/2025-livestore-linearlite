@@ -1,7 +1,6 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
 import { XMarkIcon } from '@heroicons/react/20/solid'
-import { useKeyboard } from 'react-aria'
-import { Input } from 'react-aria-components'
+import { Input } from '@/components/ui/input'
 import { Link, useSearch, useNavigate } from '@tanstack/react-router'
 import { MenuButton } from '@/components/common/menu-button'
 import type { ValidatedSearch } from '@/routes/index'
@@ -10,13 +9,11 @@ export const SearchBar = () => {
   const searchParams = useSearch({ strict: false }) as ValidatedSearch
   const navigate = useNavigate()
 
-  const { keyboardProps } = useKeyboard({
-    onKeyDown: (e) => {
-      if (e.key === 'Escape') {
-        ;(e.target as HTMLInputElement)?.blur()
-      }
-    },
-  })
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      ;(e.target as HTMLInputElement)?.blur()
+    }
+  }
 
   const handleSearchChange = (value: string) => {
     const newQuery = value || undefined
@@ -36,12 +33,12 @@ export const SearchBar = () => {
       <MagnifyingGlassIcon className="ml-2.5 size-4 shrink-0 lg:ml-0" />
       <Input
         autoFocus
-        className="input w-full border-none bg-transparent pl-2 placholder:text-neutral-400 text-neutral-800 text-sm focus:outline-none focus:ring-0 lg:pl-3 dark:text-neutral-200 dark:placeholder:text-neutral-500"
+        className="input w-full border-none bg-transparent pl-2 placeholder:text-neutral-400 text-neutral-800 text-sm focus:outline-none focus:ring-0 lg:pl-3 dark:text-neutral-200 dark:placeholder:text-neutral-500"
         onChange={(e) => handleSearchChange(e.target.value)}
         placeholder="Search issues..."
         type="text"
         value={searchParams.query ?? ''}
-        {...keyboardProps}
+        onKeyDown={handleKeyDown}
       />
       {searchParams.query && (
         <Link

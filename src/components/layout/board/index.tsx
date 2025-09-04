@@ -5,7 +5,7 @@ import { Column } from '@/components/layout/board/column'
 import { Filters } from '@/components/layout/filters'
 import { statusOptions } from '@/data/status-options'
 import { tables } from '@/lib/livestore/schema'
-import { filterStateToOrderBy, filterStateToWhere } from '@/lib/livestore/utils'
+import { filterStateToOrderBy, filterStateToWhere } from '@/utils'
 import type { Status } from '@/types/status'
 import type { ValidatedSearch } from '@/routes/board'
 

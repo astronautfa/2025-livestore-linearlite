@@ -1,4 +1,4 @@
-import { Input } from 'react-aria-components'
+import { Input } from '@/components/ui/input'
 import { useFrontendState } from '@/lib/livestore/queries'
 
 export const UserInput = ({ className }: { className?: string }) => {

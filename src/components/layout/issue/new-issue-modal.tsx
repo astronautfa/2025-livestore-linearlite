@@ -1,7 +1,7 @@
 import { useStore } from '@livestore/react'
 import { generateKeyBetween } from 'fractional-indexing'
 import React from 'react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { NewIssueModalContext } from '@/app/contexts'
 import { Modal } from '@/components/common/modal'
 import { PriorityMenu } from '@/components/common/priority-menu'
@@ -85,7 +85,7 @@ export const NewIssueModal = () => {
           <Button
             aria-label="Create issue"
             className="ml-auto rounded-lg bg-orange-500 px-4 text-sm text-white hover:bg-orange-400 focus:bg-orange-400 focus:outline-none"
-            onPress={createIssue}
+            onClick={createIssue}
           >
             Create issue
           </Button>

@@ -1,5 +1,5 @@
 import { useStore } from '@livestore/react'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { useNavigate } from '@tanstack/react-router'
 import { Avatar } from '@/components/common/avatar'
 import { PriorityMenu } from '@/components/common/priority-menu'

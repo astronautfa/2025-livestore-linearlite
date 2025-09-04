@@ -1,5 +1,5 @@
 import { XMarkIcon } from '@heroicons/react/16/solid'
-import { Button } from 'react-aria-components'
+import { Button } from '@/components/ui/button'
 import { Icon, type IconName } from '@/components/icons'
 import { FilterMenu } from '@/components/layout/filters/filter-menu'
 import { statusOptions } from '@/data/status-options'
