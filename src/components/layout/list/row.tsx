@@ -28,7 +28,7 @@ export const Row = memo(({ issue, style }: { issue: Issue; style: CSSProperties 
       id={issue.id.toString()}
       key={issue.id}
       onClick={() => navigate(`/issue/${issue.id}`)}
-      style={style}
+       style={style}
       type="button"
     >
       <div className="flex items-center gap-px">
