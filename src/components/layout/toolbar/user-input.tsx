@@ -1,6 +1,6 @@
-import { useFrontendState } from '@/lib/livestore/queries'
 import React from 'react'
 import { Input } from 'react-aria-components'
+import { useFrontendState } from '@/lib/livestore/queries'
 
 export const UserInput = ({ className }: { className?: string }) => {
   const [frontendState, setFrontendState] = useFrontendState()

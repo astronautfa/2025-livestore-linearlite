@@ -1,11 +1,11 @@
-import { Shortcut } from '@/components/common/shortcut'
-import { Icon, IconName } from '@/components/icons'
-import { statusOptions } from '@/data/status-options'
-import { Status } from '@/types/status'
 import { CheckIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 import { useKeyboard } from 'react-aria'
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components'
+import { Shortcut } from '@/components/common/shortcut'
+import { Icon, type IconName } from '@/components/icons'
+import { statusOptions } from '@/data/status-options'
+import type { Status } from '@/types/status'
 
 export const StatusMenu = ({
   status,

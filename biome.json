@@ -1,0 +1,75 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!**/*.log",
+      "!**/.DS_Store",
+      "!**/dist/",
+      "!**/node_modules/",
+      "!**/test.db",
+      "!**/.tmp/",
+      "!**/build/",
+      "!**/.tool-versions",
+      "!**/.github/",
+      "!**/src/generated/",
+      "!**/db/data/",
+      "!**/wa-sqlite-async.mjs",
+      "!**/tailwind.config.cjs"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120,
+    "attributePosition": "auto"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "warn",
+        "useConst": "error",
+        "useImportType": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noUnknownAtRules": "off"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded",
+      "trailingCommas": "all",
+      "quoteStyle": "single"
+    },
+    "globals": [
+      "console",
+      "process"
+    ]
+  },
+  "json": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "extends": [
+    "ultracite"
+  ]
+}

@@ -1,11 +1,11 @@
-import { Icon, IconName } from '@/components/icons'
-import { FilterMenu } from '@/components/layout/filters/filter-menu'
-import { statusOptions } from '@/data/status-options'
-import { useFilterState } from '@/lib/livestore/queries'
-import { Status } from '@/types/status'
 import { XMarkIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 import { Button } from 'react-aria-components'
+import { Icon, type IconName } from '@/components/icons'
+import { FilterMenu } from '@/components/layout/filters/filter-menu'
+import { statusOptions } from '@/data/status-options'
+import { useFilterState } from '@/lib/livestore/queries'
+import type { Status } from '@/types/status'
 
 export const StatusFilter = () => {
   const [filterState, setFilterState] = useFilterState()

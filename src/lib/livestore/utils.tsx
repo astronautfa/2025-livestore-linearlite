@@ -1,7 +1,7 @@
-import { Icon } from '@/components/icons'
-import { BootStatus, QueryBuilder } from '@livestore/livestore'
+import type { BootStatus, QueryBuilder } from '@livestore/livestore'
 import React from 'react'
-import { FilterState, tables } from './schema'
+import { Icon } from '@/components/icons'
+import type { FilterState, tables } from './schema'
 
 export const renderBootStatus = (bootStatus: BootStatus) => {
   return (

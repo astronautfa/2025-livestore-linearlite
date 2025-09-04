@@ -1,14 +1,14 @@
-import { Avatar } from '@/components/common/avatar'
-import { PriorityMenu } from '@/components/common/priority-menu'
-import { StatusMenu } from '@/components/common/status-menu'
-import { Issue, events } from '@/lib/livestore/schema'
-import { Priority } from '@/types/priority'
-import { Status } from '@/types/status'
-import { getIssueTag } from '@/utils/get-issue-tag'
 import { useStore } from '@livestore/react'
 import React from 'react'
 import { Button } from 'react-aria-components'
 import { useNavigate } from 'react-router-dom'
+import { Avatar } from '@/components/common/avatar'
+import { PriorityMenu } from '@/components/common/priority-menu'
+import { StatusMenu } from '@/components/common/status-menu'
+import { events, type Issue } from '@/lib/livestore/schema'
+import type { Priority } from '@/types/priority'
+import type { Status } from '@/types/status'
+import { getIssueTag } from '@/utils/get-issue-tag'
 
 export const Card = ({ issue, className }: { issue: Issue; className?: string }) => {
   const navigate = useNavigate()

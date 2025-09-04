@@ -1,12 +1,12 @@
-import { Icon, IconName } from '@/components/icons'
+import { CheckIcon } from '@heroicons/react/16/solid'
+import type React from 'react'
+import { Header, Menu, MenuItem, MenuSection, MenuTrigger, Popover, Separator } from 'react-aria-components'
+import { Icon, type IconName } from '@/components/icons'
 import { priorityOptions } from '@/data/priority-options'
 import { statusOptions } from '@/data/status-options'
 import { useFilterState } from '@/lib/livestore/queries'
-import { Priority } from '@/types/priority'
-import { Status } from '@/types/status'
-import { CheckIcon } from '@heroicons/react/16/solid'
-import React from 'react'
-import { Header, Menu, MenuItem, MenuSection, MenuTrigger, Popover, Separator } from 'react-aria-components'
+import type { Priority } from '@/types/priority'
+import type { Status } from '@/types/status'
 
 export const FilterMenu = ({ type, children }: { type?: 'status' | 'priority'; children?: React.ReactNode }) => {
   const [filterState, setFilterState] = useFilterState()

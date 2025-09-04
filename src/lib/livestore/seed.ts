@@ -1,11 +1,10 @@
-import { type Store } from '@livestore/livestore'
-
+import type { Store } from '@livestore/livestore'
+import { generateKeyBetween } from 'fractional-indexing'
 import { priorityOptions } from '@/data/priority-options'
 import { statusOptions } from '@/data/status-options'
 import { events } from '@/lib/livestore/schema'
-import { Priority } from '@/types/priority'
-import { Status } from '@/types/status'
-import { generateKeyBetween } from 'fractional-indexing'
+import type { Priority } from '@/types/priority'
+import type { Status } from '@/types/status'
 import { highestIssueId$, highestKanbanOrder$, issueCount$ } from './queries'
 
 export const seed = (store: Store, count: number) => {

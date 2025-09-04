@@ -1,3 +1,4 @@
+import React from 'react'
 import { BacklogIcon } from '@/components/icons/backlog'
 import { CanceledIcon } from '@/components/icons/canceled'
 import { DoneIcon } from '@/components/icons/done'
@@ -13,7 +14,6 @@ import { PriorityNoneIcon } from '@/components/icons/priority-none'
 import { PriorityUrgentIcon } from '@/components/icons/priority-urgent'
 import { SidebarIcon } from '@/components/icons/sidebar'
 import { TodoIcon } from '@/components/icons/todo'
-import React from 'react'
 
 const icons = {
   backlog: BacklogIcon,
