@@ -2,7 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { queryDb } from '@livestore/livestore'
 import { useStore } from '@livestore/react'
 import { Button } from 'react-aria-components'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from '@tanstack/react-router'
 import { Avatar } from '@/components/common/avatar'
 import { MenuButton } from '@/components/common/menu-button'
 import { PriorityMenu } from '@/components/common/priority-menu'
@@ -20,33 +20,34 @@ import { formatDate } from '@/utils/format-date'
 import { getIssueTag } from '@/utils/get-issue-tag'
 
 export const Issue = () => {
-  const id = Number(useParams().id ?? 0)
+  const { id } = useParams({ from: '/issue/$id' })
   const navigate = useNavigate()
   const { store } = useStore()
-  const issue = store.useQuery(queryDb(tables.issue.where({ id }).first(), { deps: [id] }))
+  const issueId = Number(id ?? 0)
+  const issue = store.useQuery(queryDb(tables.issue.where({ id: issueId }).first(), { deps: [issueId] }))
 
   const close = () => {
     if (window.history.length > 2) {
-      navigate(-1)
+      window.history.back()
     } else {
-      navigate('/')
+      navigate({ to: '/' })
     }
   }
 
   const handleChangeStatus = (status: Status) => {
-    store.commit(events.updateIssueStatus({ id: issue.id, status, modified: new Date() }))
+    store.commit(events.updateIssueStatus({ id: issueId, status, modified: new Date() }))
   }
 
   const handleChangePriority = (priority: Priority) => {
-    store.commit(events.updateIssuePriority({ id: issue.id, priority, modified: new Date() }))
+    store.commit(events.updateIssuePriority({ id: issueId, priority, modified: new Date() }))
   }
 
   const handleChangeDescription = (body: string) => {
-    store.commit(events.updateDescription({ id: issue.id, body }))
+    store.commit(events.updateDescription({ id: issueId, body }))
   }
 
   const description = store.useQuery(
-    queryDb(tables.description.select('body').where({ id: issue.id }).first(), { deps: [issue.id] }),
+    queryDb(tables.description.select('body').where({ id: issueId }).first(), { deps: [issueId] }),
   )
 
   return (
@@ -62,10 +63,10 @@ export const Issue = () => {
             Issues
           </Button>
           <ChevronRightIcon className="size-3.5" />
-          <div className="text-neutral-500 dark:text-neutral-400">{getIssueTag(id)}</div>
+           <div className="text-neutral-500 dark:text-neutral-400">{getIssueTag(issueId)}</div>
         </div>
         <div className="flex items-center gap-px">
-          <DeleteButton className="hidden lg:block" close={close} issueId={id} />
+          <DeleteButton className="hidden lg:block" close={close} issueId={issueId} />
           <BackButton close={close} />
         </div>
       </div>

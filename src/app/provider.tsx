@@ -3,7 +3,7 @@ import LiveStoreSharedWorker from '@livestore/adapter-web/shared-worker?sharedwo
 import { LiveStoreProvider } from '@livestore/react'
 import React from 'react'
 import { unstable_batchedUpdates as batchUpdates } from 'react-dom'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 import { MenuContext, NewIssueModalContext } from '@/app/contexts'
 import { schema } from '@/lib/livestore/schema'
 import { renderBootStatus } from '@/lib/livestore/utils'
@@ -42,7 +42,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
         e.preventDefault()
       }
       if (e.key === '/' && e.shiftKey) {
-        navigate('/search')
+        navigate({ to: '/search' })
         e.preventDefault()
       }
     }

@@ -1,7 +1,7 @@
 import { TrashIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 import { Button } from 'react-aria-components'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 
 const CONFIRM_TIMEOUT_MS = 2000
 
@@ -11,7 +11,7 @@ export const ResetButton = ({ className }: { className?: string }) => {
 
   const onClick = () => {
     if (confirm) {
-      navigate('/?reset')
+      navigate({ to: '/', search: { reset: true } })
       window.location.reload()
     }
     setConfirm(true)

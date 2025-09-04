@@ -1,5 +1,4 @@
 import { FPSMeter } from '@overengineering/fps-meter'
-import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons'
 import { DownloadButton } from '@/components/layout/toolbar/download-button'
 import { ResetButton } from '@/components/layout/toolbar/reset-button'
@@ -13,14 +12,15 @@ export const Toolbar = () => {
   return (
     <div className="flex h-10 w-screen items-center justify-between border-neutral-700 border-t bg-neutral-950 pr-2 pl-1 text-neutral-400">
       <div className="flex items-center gap-1">
-        <Link
+        <a
           className="flex h-6 items-center gap-2 rounded bg-neutral-900 px-1.5 font-bold text-neutral-300 text-sm hover:bg-neutral-800 focus:bg-neutral-800"
           target="_blank"
-          to="https://livestore.dev/"
+          href="https://livestore.dev/"
+          rel="noopener noreferrer"
         >
           <Icon className="mt-0.5 size-5" name="livestore" />
           <span>LiveStore</span>
-        </Link>
+        </a>
         <SyncToggle />
       </div>
       <div className="hidden items-center gap-1 lg:flex">

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Modal } from '@/components/common/modal'
 import { useFrontendState } from '@/lib/livestore/queries'
 
@@ -11,16 +10,16 @@ export const AboutModal = ({ show, setShow }: { show: boolean; setShow: (show: b
         <div className="flex flex-col gap-2 text-neutral-500 text-sm">
           <p>
             Zen Sync is an example of a collaboration application using a local-first approach, obviously inspired by{' '}
-            <Link className="text-orange-600 underline" target="_blank" to="https://linear.app">
+            <a className="text-orange-600 underline" target="_blank" href="https://linear.app" rel="noopener noreferrer">
               Linear
-            </Link>
+            </a>
             .
           </p>
           <p>
             It's built using{' '}
-            <Link className="text-orange-600 underline" target="_blank" to="https://www.livestore.dev">
+            <a className="text-orange-600 underline" target="_blank" href="https://www.livestore.dev" rel="noopener noreferrer">
               LiveStore
-            </Link>
+            </a>
             , a local-first sync layer for web and mobile apps.
           </p>
         </div>

@@ -1,7 +1,7 @@
 import { useStore } from '@livestore/react'
 import type { CSSProperties } from 'react'
 import { memo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 import { Avatar } from '@/components/common/avatar'
 import { PriorityMenu } from '@/components/common/priority-menu'
 import { StatusMenu } from '@/components/common/status-menu'
@@ -27,7 +27,7 @@ export const Row = memo(({ issue, style }: { issue: Issue; style: CSSProperties 
       className="flex w-full cursor-pointer items-center justify-between gap-4 border-neutral-200 border-b border-none bg-transparent p-0 pr-4 pl-2 text-left text-sm last:border-b-0 hover:bg-neutral-50 lg:pl-4 dark:border-neutral-700 dark:hover:bg-neutral-800/50"
       id={issue.id.toString()}
       key={issue.id}
-      onClick={() => navigate(`/issue/${issue.id}`)}
+      onClick={() => navigate({ to: '/issue/$id', params: { id: issue.id.toString() } })}
        style={style}
       type="button"
     >

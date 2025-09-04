@@ -1,6 +1,6 @@
 import { Bars4Icon, ViewColumnsIcon } from '@heroicons/react/24/outline'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 import { MenuContext } from '@/app/contexts'
 import { AboutMenu } from '@/components/layout/sidebar/about-menu'
 import { NewIssueButton } from '@/components/layout/sidebar/new-issue-button'
@@ -11,6 +11,7 @@ import { useFilterState } from '@/lib/livestore/queries'
 
 export const Sidebar = ({ className }: { className?: string }) => {
   const [, setFilterState] = useFilterState()
+  const navigate = useNavigate()
   const menuContext = React.useContext(MenuContext)
   const setShowMenu =
     menuContext?.setShowMenu ||
@@ -50,18 +51,18 @@ export const Sidebar = ({ className }: { className?: string }) => {
         </h2>
         <nav className="space-y-px text-sm leading-none">
           {navItems.map(({ title, icon: Icon, href, onClick }) => (
-            <Link
-              className="flex h-8 items-center gap-2 rounded-md px-2 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
+            <button
+              className="flex h-8 w-full items-center gap-2 rounded-md px-2 text-left hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
               key={href}
               onClick={() => {
                 onClick()
                 setShowMenu(false)
+                navigate({ to: href })
               }}
-              to={href}
             >
               <Icon className="size-4" />
               <span>{title}</span>
-            </Link>
+            </button>
           ))}
         </nav>
       </div>
