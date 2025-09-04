@@ -13,10 +13,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 export const App = () => {
   const router = (
     <Routes>
-      <Route path="/" element={<List />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/board" element={<Board />} />
-      <Route path="/issue/:id" element={<Issue />} />
+      <Route element={<List />} path="/" />
+      <Route element={<Search />} path="/search" />
+      <Route element={<Board />} path="/board" />
+      <Route element={<Issue />} path="/issue/:id" />
     </Routes>
   )
 
@@ -25,8 +25,8 @@ export const App = () => {
       <Provider>
         <Layout>
           <Sidebar className="hidden lg:flex" />
-          <div className="w-full lg:max-w-[calc(100%-16rem)] p-2 lg:pl-0">
-            <main className="flex flex-col h-full border border-neutral-200 dark:border-neutral-700 rounded-lg">
+          <div className="w-full p-2 lg:max-w-[calc(100%-16rem)] lg:pl-0">
+            <main className="flex h-full flex-col rounded-lg border border-neutral-200 dark:border-neutral-700">
               {router}
             </main>
           </div>

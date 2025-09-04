@@ -16,23 +16,23 @@ export const SearchBar = () => {
   })
 
   return (
-    <div className="h-12 shrink-0 relative border-b border-neutral-200 dark:border-neutral-700 flex items-center text-sm p-2 lg:pl-6">
+    <div className="relative flex h-12 shrink-0 items-center border-neutral-200 border-b p-2 text-sm lg:pl-6 dark:border-neutral-700">
       <MenuButton className="lg:hidden" />
-      <MagnifyingGlassIcon className="size-4 shrink-0 ml-2.5 lg:ml-0" />
+      <MagnifyingGlassIcon className="ml-2.5 size-4 shrink-0 lg:ml-0" />
       <Input
-        type="text"
         autoFocus
-        className="input w-full border-none pl-2 lg:pl-3 bg-transparent focus:outline-none focus:ring-0 placholder:text-neutral-400 dark:placeholder:text-neutral-500 dark:text-neutral-200 text-neutral-800 text-sm"
-        value={filterState.query ?? ''}
-        placeholder="Search issues..."
+        className="input w-full border-none bg-transparent pl-2 placholder:text-neutral-400 text-neutral-800 text-sm focus:outline-none focus:ring-0 lg:pl-3 dark:text-neutral-200 dark:placeholder:text-neutral-500"
         onChange={(e) => setFilterState({ query: e.target.value })}
+        placeholder="Search issues..."
+        type="text"
+        value={filterState.query ?? ''}
         {...keyboardProps}
       />
       {filterState.query && (
         <Button
           aria-label="Clear search query"
+          className="absolute right-2 flex size-8 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-100"
           onPress={() => setFilterState({ query: null })}
-          className="absolute right-2 size-8 rounded-lg hover:bg-neutral-100 focus:bg-neutral-100 flex items-center justify-center"
         >
           <XMarkIcon className="size-5" />
         </Button>

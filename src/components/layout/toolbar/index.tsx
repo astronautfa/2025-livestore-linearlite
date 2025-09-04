@@ -12,30 +12,30 @@ import { SyncToggle } from './sync-toggle'
 
 export const Toolbar = () => {
   return (
-    <div className="w-screen h-10 bg-neutral-950 border-t border-neutral-700 text-neutral-400 flex items-center justify-between pl-1 pr-2">
+    <div className="flex h-10 w-screen items-center justify-between border-neutral-700 border-t bg-neutral-950 pr-2 pl-1 text-neutral-400">
       <div className="flex items-center gap-1">
         <Link
-          to="https://livestore.dev/"
+          className="flex h-6 items-center gap-2 rounded bg-neutral-900 px-1.5 font-bold text-neutral-300 text-sm hover:bg-neutral-800 focus:bg-neutral-800"
           target="_blank"
-          className="flex items-center gap-2 text-sm font-bold rounded text-neutral-300 bg-neutral-900 hover:bg-neutral-800 focus:bg-neutral-800 px-1.5 h-6"
+          to="https://livestore.dev/"
         >
-          <Icon name="livestore" className="size-5 mt-0.5" />
+          <Icon className="mt-0.5 size-5" name="livestore" />
           <span>LiveStore</span>
         </Link>
         <SyncToggle />
       </div>
-      <div className="hidden lg:flex items-center gap-1">
+      <div className="hidden items-center gap-1 lg:flex">
         <UserInput />
         <ShareButton />
       </div>
-      <div className="hidden lg:flex items-center gap-1">
+      <div className="hidden items-center gap-1 lg:flex">
         <span>Database:</span>
         <SeedInput />
         <ResetButton />
         <DownloadButton />
         {import.meta.env.DEV && <DevtoolsButton />}
       </div>
-      <FPSMeter height={28} className="hidden lg:block" />
+      <FPSMeter className="hidden lg:block" height={28} />
     </div>
   )
 }

@@ -26,11 +26,11 @@ export const TitleInput = ({
   return (
     <input
       autoFocus={autoFocus}
-      className={`input w-full text-xl bg-transparent max-w-xl font-semibold placeholder-neutral-400 border-none leading-none p-2 focus:outline-none focus:border-none focus:ring-0 focus:bg-neutral-50 dark:focus:bg-neutral-800 rounded-md ${className}`}
+      className={`input w-full max-w-xl rounded-md border-none bg-transparent p-2 font-semibold text-xl leading-none placeholder-neutral-400 focus:border-none focus:bg-neutral-50 focus:outline-none focus:ring-0 dark:focus:bg-neutral-800 ${className}`}
+      onBlur={(e) => handleTitleChange(e.target.value)}
+      onChange={(e) => handleTitleChange(e.target.value)}
       placeholder="Issue title"
       value={issue?.title ?? title}
-      onChange={(e) => handleTitleChange(e.target.value)}
-      onBlur={(e) => handleTitleChange(e.target.value)}
     />
   )
 }

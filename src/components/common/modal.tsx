@@ -15,7 +15,9 @@ export const Modal = ({
 }) => {
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setShow(false)
+      if (e.key === 'Escape') {
+        setShow(false)
+      }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
@@ -23,24 +25,24 @@ export const Modal = ({
 
   return (
     <ModalOverlay
+      className="fixed inset-0 flex items-start justify-center bg-black/10 p-4 pt-16 lg:pt-32 dark:bg-black/20"
+      isDismissable
       isOpen={show}
       onOpenChange={setShow}
-      className="fixed inset-0 bg-black/10 dark:bg-black/20 flex items-start justify-center p-4 pt-16 lg:pt-32"
-      isDismissable
     >
-      <ReactAriaModal className="relative bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700 w-full max-w-xl">
+      <ReactAriaModal className="relative w-full max-w-xl rounded-xl border border-neutral-200 bg-white shadow-lg dark:border-neutral-700 dark:bg-neutral-800">
         {title && (
-          <div className="flex justify-between items-center p-2 pl-4 border-b border-neutral-200 dark:border-neutral-700">
-            <Heading slot="title" className="text-lg font-bold">
+          <div className="flex items-center justify-between border-neutral-200 border-b p-2 pl-4 dark:border-neutral-700">
+            <Heading className="font-bold text-lg" slot="title">
               {title}
             </Heading>
           </div>
         )}
         {children}
         <Button
-          slot="close"
+          className="absolute top-2 right-2 flex size-8 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-700 focus:outline-none dark:hover:bg-neutral-700"
           onPress={() => setShow(false)}
-          className="absolute top-2 right-2 size-8 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus:bg-neutral-700 flex items-center justify-center"
+          slot="close"
         >
           <XMarkIcon className="size-5" />
         </Button>

@@ -12,18 +12,18 @@ export const StatusFilter = () => {
   if (!filterState.status) return null
 
   return (
-    <div className="text-xs text-neutral-500 dark:text-neutral-400 ml-2 border border-neutral-300 dark:border-neutral-600 rounded-md flex h-6 overflow-hidden shrink-0 whitespace-nowrap">
-      <div className="px-2 border-r border-neutral-200 dark:border-neutral-700 h-full flex items-center gap-1">
+    <div className="ml-2 flex h-6 shrink-0 overflow-hidden whitespace-nowrap rounded-md border border-neutral-300 text-neutral-500 text-xs dark:border-neutral-600 dark:text-neutral-400">
+      <div className="flex h-full items-center gap-1 border-neutral-200 border-r px-2 dark:border-neutral-700">
         <span className="font-medium text-neutral-600 dark:text-neutral-200">Status</span>
         <span>{filterState.status.length > 1 ? 'is any of' : 'is'}</span>
       </div>
       <FilterMenu type="status">
-        <Button className="pl-5 pr-2 flex items-center h-full hover:bg-neutral-50 dark:hover:bg-neutral-800 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800 gap-1.5">
+        <Button className="flex h-full items-center gap-1.5 pr-2 pl-5 hover:bg-neutral-50 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800">
           {filterState.status.map((status, index) => (
-            <div key={index} className="h-4 -ml-3 p-px rounded-full bg-white dark:bg-neutral-900">
+            <div className="-ml-3 h-4 rounded-full bg-white p-px dark:bg-neutral-900" key={index}>
               <Icon
-                name={statusOptions[status as Status]!.icon as IconName}
                 className={`h-full ${statusOptions[status as Status]!.style}`}
+                name={statusOptions[status as Status]!.icon as IconName}
               />
             </div>
           ))}
@@ -37,8 +37,8 @@ export const StatusFilter = () => {
         </Button>
       </FilterMenu>
       <Button
+        className="group flex h-full items-center border-neutral-200 border-l px-1 hover:bg-neutral-50 focus:bg-neutral-100 focus:outline-none dark:border-neutral-700 dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
         onPress={() => setFilterState({ status: null })}
-        className="h-full flex items-center px-1 group hover:bg-neutral-50 dark:hover:bg-neutral-800 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800 border-l border-neutral-200 dark:border-neutral-700"
       >
         <XMarkIcon className="size-4 group-hover:text-neutral-700 dark:group-hover:text-neutral-200" />
       </Button>

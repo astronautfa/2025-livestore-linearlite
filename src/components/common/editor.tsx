@@ -1,13 +1,7 @@
-import Placeholder from '@tiptap/extension-placeholder'
-import Table from '@tiptap/extension-table'
-import TableCell from '@tiptap/extension-table-cell'
-import TableHeader from '@tiptap/extension-table-header'
-import TableRow from '@tiptap/extension-table-row'
-import { BubbleMenu, EditorContent, type Extensions, useEditor } from '@tiptap/react'
+import { EditorContent, type Extensions, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Markdown } from 'tiptap-markdown'
-import EditorMenu from '@/components/common/editor-menu'
 
 const Editor = ({
   value,
@@ -22,8 +16,8 @@ const Editor = ({
   className?: string
   placeholder?: string
 }) => {
-  const markdownValue = useRef<string | null>(null)
-  const extensions: Extensions = [StarterKit, Markdown, Table, TableRow, TableHeader, TableCell]
+  const extensions: Extensions = [StarterKit, Markdown]
+
   const editor = useEditor({
     extensions,
     editorProps: {
@@ -34,34 +28,25 @@ const Editor = ({
     content: value || undefined,
     onBlur: onBlur
       ? ({ editor }) => {
-          markdownValue.current = editor.storage.markdown.getMarkdown()
-          onBlur(markdownValue.current || '')
+          const markdown = editor.storage.markdown.getMarkdown()
+          onBlur(markdown || '')
         }
       : undefined,
     onUpdate: onChange
       ? ({ editor }) => {
-          markdownValue.current = editor.storage.markdown.getMarkdown()
-          onChange(markdownValue.current || '')
+          const markdown = editor.storage.markdown.getMarkdown()
+          onChange(markdown || '')
         }
       : undefined,
   })
 
-  if (placeholder) extensions.push(Placeholder.configure({ placeholder }))
-
   useEffect(() => {
-    if (editor && markdownValue.current !== value) editor.commands.setContent(value)
+    if (editor && value !== editor.storage.markdown.getMarkdown()) {
+      editor.commands.setContent(value)
+    }
   }, [value, editor])
 
-  return (
-    <>
-      <EditorContent editor={editor} />
-      {editor && (
-        <BubbleMenu updateDelay={100} editor={editor}>
-          <EditorMenu editor={editor} />
-        </BubbleMenu>
-      )}
-    </>
-  )
+  return <EditorContent editor={editor} />
 }
 
 export default Editor

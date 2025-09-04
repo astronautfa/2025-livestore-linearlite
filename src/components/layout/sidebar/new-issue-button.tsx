@@ -12,13 +12,13 @@ export const NewIssueButton = ({ status }: { status?: Status }) => {
   return (
     <Button
       aria-label="New Issue"
+      className={`flex size-8 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800 ${status === undefined ? 'border border-neutral-200 bg-white shadow dark:border-neutral-700 dark:bg-neutral-900' : ''}`}
       onPress={() => {
         setNewIssueModalStatus(status ?? 0)
         setShowMenu(false)
       }}
-      className={`size-8 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800 rounded-lg ${status === undefined ? 'bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 shadow' : ''}`}
     >
-      {status === undefined ? <Icon name="new-issue" className="size-4" /> : <PlusIcon className="size-4" />}
+      {status === undefined ? <Icon className="size-4" name="new-issue" /> : <PlusIcon className="size-4" />}
     </Button>
   )
 }

@@ -33,15 +33,15 @@ export const Filters = ({
         <SearchBar />
       ) : (
         <Header
-          totalCount={totalCount}
           filteredCount={filteredCount}
           heading={filterState?.status?.length === 1 ? statusOptions[filterState.status[0] as Status]!.name : 'Issues'}
+          totalCount={totalCount}
         />
       )}
-      <div className="h-12 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between text-sm px-4 gap-8">
+      <div className="flex h-12 items-center justify-between gap-8 border-neutral-200 border-b px-4 text-sm dark:border-neutral-700">
         <div className="flex items-center">
           {search && (
-            <div className="text-neutral-500 dark:text-neutral-400 text-xs mr-2 lg:ml-2">
+            <div className="mr-2 text-neutral-500 text-xs lg:ml-2 dark:text-neutral-400">
               <span>{filteredCount}</span>
               {filteredCount !== totalCount && <span> of {totalCount}</span>}
               <span> Issues</span>
@@ -50,15 +50,15 @@ export const Filters = ({
           <FilterMenu type={hideStatusFilter ? 'priority' : undefined}>
             <Button
               aria-label="Select filters"
-              className="group h-6 min-w-6 rounded-lg flex gap-1.5 px-1.5 items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800 text-xs font-medium"
+              className="group flex h-6 min-w-6 items-center justify-center gap-1.5 rounded-lg px-1.5 font-medium text-xs hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
             >
-              <Icon name="filter" className="size-3.5" />
+              <Icon className="size-3.5" name="filter" />
               <span className={filterState.status?.length || filterState.priority?.length ? 'lg:hidden' : ''}>
                 Filter
               </span>
             </Button>
           </FilterMenu>
-          <div className="hidden lg:flex items-center">
+          <div className="hidden items-center lg:flex">
             {!hideStatusFilter && <StatusFilter />}
             <PriorityFilter />
           </div>
@@ -67,11 +67,11 @@ export const Filters = ({
         {!hideSorting && <SortMenu />}
       </div>
       {filterState.status?.length || filterState.priority?.length ? (
-        <div className="lg:hidden h-12 border-b border-neutral-200 dark:border-neutral-700 overflow-x-auto">
-          <div className="flex items-center h-full pl-2">
+        <div className="h-12 overflow-x-auto border-neutral-200 border-b lg:hidden dark:border-neutral-700">
+          <div className="flex h-full items-center pl-2">
             {!hideStatusFilter && <StatusFilter />}
             <PriorityFilter />
-            <div className="w-4 h-full shrink-0" />
+            <div className="h-full w-4 shrink-0" />
           </div>
         </div>
       ) : null}

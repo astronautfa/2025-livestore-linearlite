@@ -24,13 +24,13 @@ export const Board = () => {
 
   return (
     <>
-      <Filters filteredCount={filteredIssueIds.length} hideStatusFilter hideSorting />
+      <Filters filteredCount={filteredIssueIds.length} hideSorting hideStatusFilter />
       <div className="grow overflow-x-auto">
-        <div className="flex gap-4 p-4 h-full">
+        <div className="flex h-full gap-4 p-4">
           {statusOptions.map((statusDetails, statusOption) => (
             <Column key={statusOption} status={statusOption as Status} statusDetails={statusDetails} />
           ))}
-          <div className="w-4 -ml-4 shrink-0" />
+          <div className="-ml-4 w-4 shrink-0" />
         </div>
       </div>
     </>

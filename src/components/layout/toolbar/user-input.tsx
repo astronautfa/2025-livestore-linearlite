@@ -6,17 +6,17 @@ export const UserInput = ({ className }: { className?: string }) => {
   const [frontendState, setFrontendState] = useFrontendState()
 
   return (
-    <div className={`lg:h-full flex items-center gap-1 ${className}`}>
+    <div className={`flex items-center gap-1 lg:h-full ${className}`}>
       <span>User:</span>
       <Input
         aria-label="Test User"
-        placeholder="Test User"
         autoComplete="off"
+        className="h-6 grow rounded border-none bg-neutral-800 bg-transparent px-1.5 text-neutral-300 text-xs placeholder:text-neutral-500 hover:bg-neutral-700 focus:border-none focus:bg-neutral-700 focus:outline-none focus:ring-0 lg:w-28 lg:grow-0"
+        onBlur={() => setFrontendState({ ...frontendState, user: frontendState.user || 'John Doe' })}
+        onChange={(e) => setFrontendState({ ...frontendState, user: e.target.value })}
+        placeholder="Test User"
         type="text"
         value={frontendState.user}
-        onChange={(e) => setFrontendState({ ...frontendState, user: e.target.value })}
-        onBlur={() => setFrontendState({ ...frontendState, user: frontendState.user || 'John Doe' })}
-        className="h-6 px-1.5 bg-transparent bg-neutral-800 hover:bg-neutral-700 border-none text-xs rounded placeholder:text-neutral-500 text-neutral-300 grow lg:grow-0 lg:w-28 focus:outline-none focus:ring-0 focus:border-none focus:bg-neutral-700"
       />
     </div>
   )

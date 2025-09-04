@@ -2,9 +2,11 @@ import React from 'react'
 import { getAcronym } from '@/utils/get-acronym'
 
 export const Avatar = ({ name }: { name?: string }) => {
-  if (!name) name = 'Me'
+  if (!name) {
+    name = 'Me'
+  }
   return (
-    <div className="size-6 shrink-0 rounded-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-600 text-xs font-medium text-neutral-500 dark:text-neutral-300">
+    <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-neutral-200 font-medium text-neutral-500 text-xs dark:bg-neutral-600 dark:text-neutral-300">
       {getAcronym(name)}
     </div>
   )

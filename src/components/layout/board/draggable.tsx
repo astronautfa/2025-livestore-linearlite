@@ -12,17 +12,17 @@ export const Draggable = memo(({ issue, style }: { issue: Issue; style: CSSPrope
   })
 
   return (
-    <div key={issue.id} id={issue.id.toString()} className="relative px-2 pb-2" style={style}>
+    <div className="relative px-2 pb-2" id={issue.id.toString()} key={issue.id} style={style}>
       <div {...dragProps}>
         <Card issue={issue} />
         {isDragging && (
           <div className="absolute inset-0 bg-neutral-50 p-3 pt-1">
-            <div className="w-full h-full border border-neutral-200/50 rounded-md" />
+            <div className="h-full w-full rounded-md border border-neutral-200/50" />
           </div>
         )}
         <DragPreview ref={preview}>
           {() => (
-            <div className="px-2 w-[254px] lg:w-[318px]">
+            <div className="w-[254px] px-2 lg:w-[318px]">
               <Card issue={issue} />
             </div>
           )}

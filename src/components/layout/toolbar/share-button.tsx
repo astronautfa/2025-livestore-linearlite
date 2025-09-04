@@ -23,8 +23,8 @@ export const ShareButton = ({ className }: { className?: string }) => {
         <span>Workspace:</span>
         <Button
           aria-label="Copy workspace URL"
+          className="flex h-6 items-center gap-1 whitespace-nowrap rounded bg-neutral-800 px-1.5 hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none"
           onPress={copyUrl}
-          className="h-6 px-1.5 flex items-center gap-1 bg-neutral-800 rounded hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none whitespace-nowrap"
         >
           {copied ? (
             <>
@@ -45,24 +45,24 @@ export const ShareButton = ({ className }: { className?: string }) => {
         </Button>
         <Button
           aria-label="Copy workspace URL"
+          className="flex size-6 items-center justify-center rounded bg-neutral-800 hover:bg-neutral-700 focus:bg-neutral-800 focus:outline-none"
           onPress={() => setShowQR(true)}
-          className="size-6 flex items-center justify-center bg-neutral-800 rounded hover:bg-neutral-700 focus:outline-none focus:bg-neutral-800"
         >
           <QrCodeIcon className="size-3.5" />
         </Button>
       </div>
       <ModalOverlay
+        className="fixed inset-0 bottom-12 flex items-start justify-center bg-black/10 p-4 pt-16 lg:pt-32 dark:bg-black/20"
+        isDismissable
         isOpen={showQR}
         onOpenChange={setShowQR}
-        className="fixed inset-0 bottom-12 bg-black/10 dark:bg-black/20 flex items-start justify-center p-4 pt-16 lg:pt-32"
-        isDismissable
       >
-        <ReactAriaModal className="relative bg-white rounded-xl shadow-lg border overflow-hidden border-neutral-200 p-4">
+        <ReactAriaModal className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-4 shadow-lg">
           <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURI(window.location.href)}`}
             crossOrigin="anonymous"
-            width="200"
             height="200"
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURI(window.location.href)}`}
+            width="200"
           />
         </ReactAriaModal>
       </ModalOverlay>

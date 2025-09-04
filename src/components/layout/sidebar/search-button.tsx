@@ -10,13 +10,13 @@ export const SearchButton = () => {
 
   return (
     <Link
-      to="/search"
       aria-label="Open search page"
+      className="flex size-8 items-center justify-center rounded-lg hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
       onClick={() => {
         setFilterState({ query: null })
         setShowMenu(false)
       }}
-      className="rounded-lg size-8 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800"
+      to="/search"
     >
       <MagnifyingGlassIcon className="size-4" />
     </Link>

@@ -22,19 +22,19 @@ export const Card = ({ issue, className }: { issue: Issue; className?: string })
 
   return (
     <div
-      className={`p-2 text-sm bg-white dark:bg-neutral-900 rounded-md shadow-sm dark:shadow-none border border-transparent dark:border-neutral-700/50 cursor-pointer h-full ${className ?? ''}`}
+      className={`h-full cursor-pointer rounded-md border border-transparent bg-white p-2 text-sm shadow-sm dark:border-neutral-700/50 dark:bg-neutral-900 dark:shadow-none ${className ?? ''}`}
       onClick={() => navigate(`/issue/${issue.id}`)}
     >
-      <Button slot="drag" className="size-0 absolute left-0 top-0" />
-      <div className="flex items-center justify-between pl-2 pt-1 pr-1 mb-0.5">
-        <div className="text-xs text-neutral-500 dark:text-neutral-400">{getIssueTag(issue.id)}</div>
+      <Button className="absolute top-0 left-0 size-0" slot="drag" />
+      <div className="mb-0.5 flex items-center justify-between pt-1 pr-1 pl-2">
+        <div className="text-neutral-500 text-xs dark:text-neutral-400">{getIssueTag(issue.id)}</div>
         <Avatar name={issue.creator} />
       </div>
-      <div className="flex items-center gap-px my-px">
-        <StatusMenu status={issue.status} onStatusChange={handleChangeStatus} />
-        <div className="font-medium grow line-clamp-1">{issue.title}</div>
+      <div className="my-px flex items-center gap-px">
+        <StatusMenu onStatusChange={handleChangeStatus} status={issue.status} />
+        <div className="line-clamp-1 grow font-medium">{issue.title}</div>
       </div>
-      <PriorityMenu showLabel priority={issue.priority} onPriorityChange={handleChangePriority} />
+      <PriorityMenu onPriorityChange={handleChangePriority} priority={issue.priority} showLabel />
     </div>
   )
 }

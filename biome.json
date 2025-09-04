@@ -15,7 +15,7 @@
       "!**/src/generated/",
       "!**/db/data/",
       "!**/wa-sqlite-async.mjs",
-      "!**/tailwind.config.cjs"
+      "!**/tailwind.config.js"
     ]
   },
   "formatter": {
@@ -32,12 +32,18 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "error",
+        "noUnusedImports": {
+          "level": "error",
+          "options": {}
+        }
       },
       "style": {
         "noNonNullAssertion": "warn",
+        "useBlockStatements": "error",
         "useConst": "error",
-        "useImportType": "error"
+        "useImportType": "error",
+        "useTemplate": "error"
       },
       "suspicious": {
         "noExplicitAny": "warn",
@@ -54,10 +60,7 @@
       "trailingCommas": "all",
       "quoteStyle": "single"
     },
-    "globals": [
-      "console",
-      "process"
-    ]
+    "globals": ["console", "process"]
   },
   "json": {
     "formatter": {
@@ -69,7 +72,5 @@
       "enabled": true
     }
   },
-  "extends": [
-    "ultracite"
-  ]
+  "extends": ["ultracite"]
 }

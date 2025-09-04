@@ -27,7 +27,7 @@ export const CommentInput = ({ issueId, className }: { issueId: number; classNam
       events.createComment({
         id: crypto.randomUUID(),
         body: commentDraft,
-        issueId: issueId,
+        issueId,
         created: new Date(),
         creator: frontendState.user,
       }),
@@ -37,20 +37,20 @@ export const CommentInput = ({ issueId, className }: { issueId: number; classNam
 
   return (
     <div
-      className={`bg-white dark:bg-neutral-800 pb-4 rounded-lg shadow dark:shadow-none border border-transparent dark:border-neutral-700/50 ${className}`}
+      className={`rounded-lg border border-transparent bg-white pb-4 shadow dark:border-neutral-700/50 dark:bg-neutral-800 dark:shadow-none ${className}`}
       {...keyboardProps}
     >
       <Editor
         className="px-4 py-1"
-        value={commentDraft}
         onChange={(value) => setCommentDraft(value)}
         placeholder="Leave a comment..."
+        value={commentDraft}
       />
       {/* TODO add tooltip for submit shortcut */}
       <Button
         aria-label="Submit comment"
+        className="mr-4 ml-auto flex size-7 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow hover:bg-neutral-100 hover:text-neutral-800 focus:bg-neutral-100 focus:text-neutral-800 focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-700 dark:focus:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-100"
         onPress={submitComment}
-        className="size-7 rounded-full text-neutral-600 dark:text-neutral-200 hover:text-neutral-800 focus:text-neutral-800 dark:hover:text-neutral-100 dark:focus:text-neutral-100 bg-white hover:bg-neutral-100 focus:outline-none focus:bg-neutral-100 shadow border border-neutral-200 dark:border-neutral-600 flex items-center justify-center ml-auto mr-4 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
       >
         <ArrowUpIcon className="size-4" />
       </Button>

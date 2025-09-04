@@ -50,26 +50,26 @@ export const ThemeButton = () => {
     <MenuTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
       <Button
         aria-label="Change theme"
-        className="size-8 flex items-center justify-center hover:bg-neutral-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800 rounded-lg bg-white border border-neutral-200 dark:border-neutral-700 shadow"
+        className="flex size-8 items-center justify-center rounded-lg border border-neutral-200 bg-white shadow hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
       >
         <SunIcon className="size-4 dark:hidden" />
-        <MoonIcon className="size-4 hidden dark:block" />
+        <MoonIcon className="hidden size-4 dark:block" />
       </Button>
-      <Popover className="bg-white dark:bg-neutral-800 w-40 rounded-lg shadow-md border border-neutral-200 dark:border-neutral-700 text-sm leading-none">
+      <Popover className="w-40 rounded-lg border border-neutral-200 bg-white text-sm leading-none shadow-md dark:border-neutral-700 dark:bg-neutral-800">
         <Menu className="p-2 focus:outline-none" {...keyboardProps}>
           {themeOptions.map(({ id, label, shortcut }) => {
             return (
               <MenuItem
+                className="group/item flex cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
                 key={id}
                 onAction={() => selectTheme(id)}
-                className="group/item p-2 rounded-md flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-700 cursor-pointer"
               >
                 {id === 'light' && <SunIcon className="size-3.5" />}
                 {id === 'dark' && <MoonIcon className="size-3.5" />}
                 {id === 'system' && <ComputerDesktopIcon className="size-3.5" />}
                 <span>{label}</span>
-                {id === theme && <CheckIcon className="size-4 absolute right-9" />}
-                <Shortcut keys={[shortcut]} className="absolute right-3" />
+                {id === theme && <CheckIcon className="absolute right-9 size-4" />}
+                <Shortcut className="absolute right-3" keys={[shortcut]} />
               </MenuItem>
             )
           })}

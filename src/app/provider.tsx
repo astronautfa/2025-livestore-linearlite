@@ -35,11 +35,9 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const element = e.target as HTMLElement
       if (element.classList.contains('input')) return
-      if (e.key === 'c') {
-        if (!element.classList.contains('input')) {
-          setNewIssueModalStatus(0)
-          e.preventDefault()
-        }
+      if (e.key === 'c' && !element.classList.contains('input')) {
+        setNewIssueModalStatus(0)
+        e.preventDefault()
       }
       if (e.key === '/' && e.shiftKey) {
         navigate('/search')
@@ -51,7 +49,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   }, [navigate])
 
   return (
-    <LiveStoreProvider schema={schema} adapter={adapter} renderLoading={renderBootStatus} batchUpdates={batchUpdates}>
+    <LiveStoreProvider adapter={adapter} batchUpdates={batchUpdates} renderLoading={renderBootStatus} schema={schema}>
       <MenuContext.Provider value={{ showMenu, setShowMenu }}>
         <NewIssueModalContext.Provider value={{ newIssueModalStatus, setNewIssueModalStatus }}>
           {children}

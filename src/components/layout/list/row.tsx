@@ -24,22 +24,22 @@ export const Row = memo(({ issue, style }: { issue: Issue; style: CSSProperties 
 
   return (
     <div
-      key={issue.id}
+      className="flex w-full cursor-pointer items-center justify-between gap-4 border-neutral-200 border-b pr-4 pl-2 text-sm last:border-b-0 hover:bg-neutral-50 lg:pl-4 dark:border-neutral-700 dark:hover:bg-neutral-800/50"
       id={issue.id.toString()}
-      className="flex items-center gap-4 justify-between pr-4 pl-2 lg:pl-4 w-full text-sm border-b last:border-b-0 border-neutral-200 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800/50 dark:border-neutral-700"
+      key={issue.id}
       onClick={() => navigate(`/issue/${issue.id}`)}
       style={style}
     >
       <div className="flex items-center gap-px">
-        <PriorityMenu priority={issue.priority} onPriorityChange={handleChangePriority} />
-        <div className="text-neutral-500 dark:text-neutral-400 px-1 text-xs hidden lg:block min-w-14">
+        <PriorityMenu onPriorityChange={handleChangePriority} priority={issue.priority} />
+        <div className="hidden min-w-14 px-1 text-neutral-500 text-xs lg:block dark:text-neutral-400">
           {getIssueTag(issue.id)}
         </div>
-        <StatusMenu status={issue.status} onStatusChange={handleChangeStatus} />
-        <div className="font-medium ml-2 shrink line-clamp-1">{issue.title}</div>
+        <StatusMenu onStatusChange={handleChangeStatus} status={issue.status} />
+        <div className="ml-2 line-clamp-1 shrink font-medium">{issue.title}</div>
       </div>
       <div className="flex items-center gap-4">
-        <div className="hidden lg:block text-neutral-500 dark:text-neutral-400 text-xs">
+        <div className="hidden text-neutral-500 text-xs lg:block dark:text-neutral-400">
           {formatDate(new Date(issue.created))}
         </div>
         <Avatar name={issue.creator} />

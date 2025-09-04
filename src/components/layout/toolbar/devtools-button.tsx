@@ -13,12 +13,12 @@ export const DevtoolsButton = ({ className }: { className?: string }) => {
   }, [store.storeId, store.sessionId, store.clientId])
 
   return (
-    <div className={`lg:h-full flex items-center ${className}`}>
+    <div className={`flex items-center lg:h-full ${className}`}>
       <a
         aria-label="Download database"
+        className="flex h-6 items-center gap-1 rounded bg-orange-500 px-1.5 text-white hover:bg-orange-400 focus:bg-orange-400 focus:outline-none"
         href={devtoolsUrl}
         target="_blank"
-        className="h-6 px-1.5 flex items-center gap-1 bg-orange-500 text-white rounded hover:bg-orange-400 focus:outline-none focus:bg-orange-400"
       >
         <CodeBracketIcon className="size-3.5 shrink-0" />
         <span>Devtools</span>

@@ -30,7 +30,7 @@ export const Sidebar = ({ className }: { className?: string }) => {
 
   return (
     <aside
-      className={`bg-white dark:bg-neutral-900 w-64 shrink-0 overflow-y-auto flex flex-col justify-between p-2 pt-4 ${className}`}
+      className={`flex w-64 shrink-0 flex-col justify-between overflow-y-auto bg-white p-2 pt-4 dark:bg-neutral-900 ${className}`}
     >
       <div>
         <div className="flex items-center justify-between pr-2">
@@ -40,19 +40,19 @@ export const Sidebar = ({ className }: { className?: string }) => {
             <NewIssueButton />
           </div>
         </div>
-        <h2 className="p-2 pt-0 leading-none text-2xs uppercase font-medium tracking-wide text-neutral-400 mt-8">
+        <h2 className="mt-8 p-2 pt-0 font-medium text-2xs text-neutral-400 uppercase leading-none tracking-wide">
           Issues
         </h2>
-        <nav className="text-sm leading-none space-y-px">
+        <nav className="space-y-px text-sm leading-none">
           {navItems.map(({ title, icon: Icon, href, onClick }, index) => (
             <Link
+              className="flex h-8 items-center gap-2 rounded-md px-2 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-800 dark:hover:bg-neutral-800"
               key={index}
-              to={href}
               onClick={() => {
                 onClick()
                 setShowMenu(false)
               }}
-              className="flex items-center gap-2 px-2 h-8 rounded-md focus:outline-none dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100"
+              to={href}
             >
               <Icon className="size-4" />
               <span>{title}</span>
@@ -60,7 +60,7 @@ export const Sidebar = ({ className }: { className?: string }) => {
           ))}
         </nav>
       </div>
-      <div className="p-2 flex items-center gap-2">
+      <div className="flex items-center gap-2 p-2">
         <ToolbarButton />
         <ThemeButton />
       </div>

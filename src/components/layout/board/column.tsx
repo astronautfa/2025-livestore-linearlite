@@ -89,7 +89,7 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
       store.commit(events.updateIssueKanbanOrder({ id: Number(items[0]), status, kanbanorder, modified: new Date() }))
     },
     renderDropIndicator: (target) => {
-      return <DropIndicator target={target} className="h-1 mx-3.5 rounded-full bg-orange-500" />
+      return <DropIndicator className="mx-3.5 h-1 rounded-full bg-orange-500" target={target} />
     },
     getDropOperation: () => 'move',
   })
@@ -104,10 +104,10 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
   )
 
   return (
-    <div className="bg-neutral-50 border border-neutral-100 dark:bg-neutral-800 dark:border-neutral-700/50 rounded-lg w-64 lg:w-80 shrink-0 h-full flex flex-col">
-      <div className="flex items-center justify-between p-2 pb-0 pl-4 gap-4">
+    <div className="flex h-full w-64 shrink-0 flex-col rounded-lg border border-neutral-100 bg-neutral-50 lg:w-80 dark:border-neutral-700/50 dark:bg-neutral-800">
+      <div className="flex items-center justify-between gap-4 p-2 pb-0 pl-4">
         <div className="flex items-center gap-2">
-          <Icon name={statusDetails.icon} className={`size-3.5 ${statusDetails.style}`} />
+          <Icon className={`size-3.5 ${statusDetails.style}`} name={statusDetails.icon} />
           <h3 className="font-medium text-sm">{statusDetails.name}</h3>
         </div>
         <NewIssueButton status={status} />
@@ -117,18 +117,18 @@ export const Column = ({ status, statusDetails }: { status: Status; statusDetail
           {({ width, height }: { width: number; height: number }) => (
             <Virtualizer layout={layout}>
               <GridList
-                items={filteredIssues}
                 aria-label={`Issues with status ${statusDetails.name}`}
+                className="overflow-y-auto pt-2"
                 dragAndDropHooks={dragAndDropHooks}
-                className="pt-2 overflow-y-auto"
-                style={{ width, height }}
+                items={filteredIssues}
                 onScroll={(e) => setScrollState({ list: (e.target as HTMLElement).scrollTop })}
+                style={{ width, height }}
               >
                 {(issue) => (
                   <GridListItem
-                    textValue={issue.id.toString()}
                     aria-label={`Issue ${issue.id}: ${issue.title}`}
-                    className="group data-[dragging]:opacity-50 w-full px-2 focus:outline-none"
+                    className="group w-full px-2 focus:outline-none data-[dragging]:opacity-50"
+                    textValue={issue.id.toString()}
                   >
                     <Card issue={issue} />
                   </GridListItem>

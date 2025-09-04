@@ -58,28 +58,28 @@ export const NewIssueModal = () => {
   }
 
   return (
-    <Modal show={newIssueModalStatus !== false} setShow={closeModal}>
+    <Modal setShow={closeModal} show={newIssueModalStatus !== false}>
       <div className="p-2">
-        <h2 className="px-2 py-3 leading-none text-2xs uppercase font-medium tracking-wide text-neutral-400">
+        <h2 className="px-2 py-3 font-medium text-2xs text-neutral-400 uppercase leading-none tracking-wide">
           New issue
         </h2>
-        <TitleInput title={title} setTitle={setTitle} className="focus:!bg-transparent" autoFocus />
+        <TitleInput autoFocus className="focus:!bg-transparent" setTitle={setTitle} title={title} />
         <DescriptionInput
+          className="focus:!bg-transparent -mt-2"
           description={description}
           setDescription={setDescription}
-          className="focus:!bg-transparent -mt-2"
         />
-        <div className="mt-2 flex gap-px w-full">
+        <div className="mt-2 flex w-full gap-px">
           <StatusMenu
+            onStatusChange={setNewIssueModalStatus}
             showLabel
             status={newIssueModalStatus === false ? 0 : (newIssueModalStatus as Status)}
-            onStatusChange={setNewIssueModalStatus}
           />
-          <PriorityMenu showLabel priority={priority} onPriorityChange={setPriority} />
+          <PriorityMenu onPriorityChange={setPriority} priority={priority} showLabel />
           <Button
-            onPress={createIssue}
             aria-label="Create issue"
-            className="ml-auto bg-orange-500 rounded-lg text-white text-sm px-4 hover:bg-orange-400 focus:outline-none focus:bg-orange-400"
+            className="ml-auto rounded-lg bg-orange-500 px-4 text-sm text-white hover:bg-orange-400 focus:bg-orange-400 focus:outline-none"
+            onPress={createIssue}
           >
             Create issue
           </Button>

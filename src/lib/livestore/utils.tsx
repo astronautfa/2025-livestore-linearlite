@@ -5,9 +5,9 @@ import type { FilterState, tables } from './schema'
 
 export const renderBootStatus = (bootStatus: BootStatus) => {
   return (
-    <div className="fixed inset-0 bg-white dark:bg-neutral-900 flex flex-col items-center justify-center gap-4 text-sm">
-      <div className="flex items-center gap-3 text-xl font-bold">
-        <Icon name="livestore" className="size-7 mt-1" />
+    <div className="fixed inset-0 flex flex-col items-center justify-center gap-4 bg-white text-sm dark:bg-neutral-900">
+      <div className="flex items-center gap-3 font-bold text-xl">
+        <Icon className="mt-1 size-7" name="livestore" />
         <span>LiveStore</span>
       </div>
       {bootStatus.stage === 'loading' && <div>Loading...</div>}
